@@ -11,23 +11,13 @@ Content-Disposition: form-data; name="file"; filename="test.jpg"
 
 
 ### Register
-POST http://localhost:8080/auth/registration
-Content-Type: application/json
-
-{
-  "phone": "998145009",
-  "name": "Azimjon",
-  "surname": "Nazarov",
-  "password": "200622az",
-  "role": "ROLE_ADMIN",
-  "photoId": "a2398309-3a48-434b-8253-7296781c4669"
-}
+POST http://localhost:8080/auth/registration/998145008
 
 ###Login
 PUT http://localhost:8080/auth/verification
 Content-Type: application/json
 
 {
-  "phone": "998145008",
-  "code": "1234"
+  "phone": "998145007",
+  "code": "2222"
 }

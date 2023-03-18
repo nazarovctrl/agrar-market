@@ -7,6 +7,9 @@ import lombok.Setter;
 @Setter
 public class ProfileDetailDTO {
 
-    private String name;
-    private String surname;
+    private String fullName;
+    private String phone;
+    private String email;
+    private String photoId;
+
 }

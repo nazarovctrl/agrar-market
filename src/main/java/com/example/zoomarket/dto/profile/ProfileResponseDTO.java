@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProfileResponseDTO {
 
-    private Integer id;
+    private Long id;
     private String fullName;
 
 
