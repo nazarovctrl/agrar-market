@@ -4,6 +4,7 @@ import com.example.zoomarket.dto.post.PostCreateDTO;
 import com.example.zoomarket.dto.post.PostResponseDTO;
 import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.service.PostService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @Operation(summary = "Method for create post", description = "This method used to create post")
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/create")
     public ResponseEntity<PostResponseDTO> create(@Valid @RequestBody PostCreateDTO postCreateDTO) {
@@ -33,6 +35,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(summary = "Method for create post", description = "This method used to delete post")
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{postId}")
     public ResponseEntity<Boolean> delete(@PathVariable Long postId) {
@@ -40,6 +43,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(summary = "Method for get all post", description = "This method used to get all posts")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/all")
     public ResponseEntity<Page<PostResponseDTO>> getAll(@RequestParam("page") Integer page,
@@ -48,6 +52,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(summary = "Method for get all animals", description = "This method used to get all animals")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/animals")
     public ResponseEntity<Page<PostResponseDTO>> getAnimals(@RequestParam("page") Integer page,
@@ -56,6 +61,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(summary = "Method for get all animals", description = "This method used to get animals which belongs to that user")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/profile/animals")
     public ResponseEntity<Page<PostResponseDTO>> getProfileAnimals(@RequestParam("page") Integer page,
@@ -64,6 +70,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(summary = "Method for get all plants", description = "This method used to get all plants")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/plants")
     public ResponseEntity<Page<PostResponseDTO>> getPlants(@RequestParam("page") Integer page,
@@ -72,6 +79,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @Operation(summary = "Method for get all plants", description = "This method used to get plants which belongs to that user")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/profile/plants")
     public ResponseEntity<Page<PostResponseDTO>> getProfilePlants(@RequestParam("page") Integer page,
