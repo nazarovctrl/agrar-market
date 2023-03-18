@@ -1,6 +1,7 @@
 package com.example.zoomarket.controller;
 
 import com.example.zoomarket.service.PostLikeService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,18 @@ public class PostLikeController {
     }
 
     @PreAuthorize("hasRole('USER')")
+    @Operation(summary = "Method for create like", description = " This method is used to create like ")
     @PostMapping("/create/{postId}")
     public ResponseEntity<Boolean> create(@PathVariable Long postId) {
         Boolean result = postLikeService.create(getUserId(), postId);
+        return ResponseEntity.ok(result);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @Operation(summary = "Method for delete like", description = " This method is used to delete like ")
+    @DeleteMapping("/delete/{postId}")
+    public ResponseEntity<Boolean> delete(@PathVariable Long postId) {
+        Boolean result = postLikeService.deleteById(postId, getUserId());
         return ResponseEntity.ok(result);
     }
 

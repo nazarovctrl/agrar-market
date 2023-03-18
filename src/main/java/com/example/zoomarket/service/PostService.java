@@ -105,7 +105,7 @@ public class PostService {
     public Page<PostResponseDTO> getAllByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndTypeTypeOrderByLikeCount(pageable, type);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndTypeTypeOrderByLikeCountDesc(pageable, type);
 
         List<PostEntity> content = pageObj.getContent();
 
@@ -119,7 +119,7 @@ public class PostService {
     public Page<PostResponseDTO> getProfilePostsByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndProfileIdAndTypeTypeOrderByLikeCount(pageable, profileId, type);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndProfileIdAndTypeTypeOrderByLikeCountDesc(pageable, profileId, type);
 
         List<PostEntity> content = pageObj.getContent();
 

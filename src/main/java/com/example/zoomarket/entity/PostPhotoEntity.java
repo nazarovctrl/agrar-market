@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 
 @Entity
-@Table
+@Table(name = "post_photo")
 public class PostPhotoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

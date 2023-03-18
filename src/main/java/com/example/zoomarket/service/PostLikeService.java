@@ -3,6 +3,7 @@ package com.example.zoomarket.service;
 import com.example.zoomarket.dto.post.PostResponseDTO;
 import com.example.zoomarket.entity.PostLikeEntity;
 import com.example.zoomarket.exp.post.like.PostAlreadyLikedException;
+import com.example.zoomarket.exp.post.like.PostNotLikedException;
 import com.example.zoomarket.repository.PostLikeRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,15 @@ public class PostLikeService {
     public Boolean isLiked(Long profileId, Long postId) {
         Optional<PostLikeEntity> byPostIdAndProfileId = postLikeRepository.findByPostIdAndProfileId(postId, profileId);
         return byPostIdAndProfileId.isEmpty();
+    }
+
+    public Boolean deleteById(Long postId, Long profileId) {
+        Optional<PostLikeEntity> byPostIdAndProfileId = postLikeRepository.findByPostIdAndProfileId(postId, profileId);
+        if (byPostIdAndProfileId.isEmpty()) {
+            throw new PostNotLikedException("Post already liked");
+        }
+
+        postLikeRepository.delete(byPostIdAndProfileId.get());
+        return true;
     }
 }
