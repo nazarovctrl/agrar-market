@@ -179,4 +179,14 @@ public class PostService {
 
         return toPostResponse(postEntity, profileId);
     }
+
+    public PostResponseDTO getById(Long id, Long profileId) {
+        Optional<PostEntity> byId = postRepository.findById(id);
+        if (byId.isEmpty()) {
+            throw new PostNotFoundException("Post not found");
+        }
+
+
+        return toPostResponse(byId.get(), profileId);
+    }
 }

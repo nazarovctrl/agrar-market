@@ -33,6 +33,11 @@ Content-Type: application/json
 }
 
 
+### GET POST BY ID
+GET http://localhost:8080/post/get/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw
+
+
 ### DELETE POST
 DELETE http://localhost:8080/post/delete/2
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw

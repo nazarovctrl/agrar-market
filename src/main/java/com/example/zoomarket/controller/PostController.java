@@ -38,17 +38,25 @@ public class PostController {
 
     @Operation(summary = "Method for update post", description = "This method used to update post")
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/update/{postId}")
+    @PutMapping("/update/{postId}")
     public ResponseEntity<PostResponseDTO> update(@PathVariable Long postId, @Valid @RequestBody PostUpdateDTO dto) {
         PostResponseDTO result = postService.update(postId, getUserId(), dto);
         return ResponseEntity.ok(result);
     }
 
-    @Operation(summary = "Method for create post", description = "This method used to delete post")
+    @Operation(summary = "Method for delete post", description = "This method used to delete post")
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{postId}")
     public ResponseEntity<Boolean> delete(@PathVariable Long postId) {
         Boolean result = postService.delete(getUserId(), postId);
+        return ResponseEntity.ok(result);
+    }
+
+    @Operation(summary = "Method for get post by id", description = "This method used to get post by id")
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/get/{id}")
+    public ResponseEntity<PostResponseDTO> getAll(@PathVariable Long id) {
+        PostResponseDTO result = postService.getById(id, getUserId());
         return ResponseEntity.ok(result);
     }
 
