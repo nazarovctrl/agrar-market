@@ -41,7 +41,7 @@ public class PostEntity {
     @Column
     private String location;
 
-    @Column
+    @Column(columnDefinition = "text")
     private String description;
 
     @Column
@@ -49,4 +49,7 @@ public class PostEntity {
 
     @Column
     private LocalDateTime createdDate = LocalDateTime.now();
+
+    @Column
+    private Boolean visible = true;
 }

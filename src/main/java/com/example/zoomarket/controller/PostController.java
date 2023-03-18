@@ -2,18 +2,17 @@ package com.example.zoomarket.controller;
 
 import com.example.zoomarket.dto.post.PostCreateDTO;
 import com.example.zoomarket.dto.post.PostResponseDTO;
+import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.service.PostService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Tag(name = "Post Controller", description = "This Controller for post")
@@ -31,6 +30,53 @@ public class PostController {
     @PostMapping("/create")
     public ResponseEntity<PostResponseDTO> create(@Valid @RequestBody PostCreateDTO postCreateDTO) {
         PostResponseDTO result = postService.create(getUserId(), postCreateDTO);
+        return ResponseEntity.ok(result);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/delete/{postId}")
+    public ResponseEntity<Boolean> delete(@PathVariable Long postId) {
+        Boolean result = postService.delete(getUserId(), postId);
+        return ResponseEntity.ok(result);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/get/all")
+    public ResponseEntity<Page<PostResponseDTO>> getAll(@RequestParam("page") Integer page,
+                                                        @RequestParam("size") Integer size) {
+        Page<PostResponseDTO> result = postService.getAll(page, size, getUserId());
+        return ResponseEntity.ok(result);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/get/animals")
+    public ResponseEntity<Page<PostResponseDTO>> getAnimals(@RequestParam("page") Integer page,
+                                                        @RequestParam("size") Integer size) {
+        Page<PostResponseDTO> result = postService.getAllByType(page, size, getUserId(), Type.ANIMAL);
+        return ResponseEntity.ok(result);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/get/profile/animals")
+    public ResponseEntity<Page<PostResponseDTO>> getProfileAnimals(@RequestParam("page") Integer page,
+                                                            @RequestParam("size") Integer size) {
+        Page<PostResponseDTO> result = postService.getProfilePostsByType(page, size, getUserId(), Type.ANIMAL);
+        return ResponseEntity.ok(result);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/get/plants")
+    public ResponseEntity<Page<PostResponseDTO>> getPlants(@RequestParam("page") Integer page,
+                                                               @RequestParam("size") Integer size) {
+        Page<PostResponseDTO> result = postService.getAllByType(page, size, getUserId(), Type.PLANT);
+        return ResponseEntity.ok(result);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/get/profile/plants")
+    public ResponseEntity<Page<PostResponseDTO>> getProfilePlants(@RequestParam("page") Integer page,
+                                                           @RequestParam("size") Integer size) {
+        Page<PostResponseDTO> result = postService.getProfilePostsByType(page, size, getUserId(), Type.PLANT);
         return ResponseEntity.ok(result);
     }
 

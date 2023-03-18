@@ -22,11 +22,16 @@ public class PostLikeService {
             throw new PostAlreadyLikedException("Post already liked");
         }
 
-        // TODO 
+        // TODO
         PostLikeEntity postLikeEntity = new PostLikeEntity();
         postLikeEntity.setPostId(postId);
         postLikeEntity.setProfileId(profileId);
         postLikeRepository.save(postLikeEntity);
         return true;
+    }
+
+    public Boolean isLiked(Long profileId, Long postId) {
+        Optional<PostLikeEntity> byPostIdAndProfileId = postLikeRepository.findByPostIdAndProfileId(postId, profileId);
+        return byPostIdAndProfileId.isEmpty();
     }
 }

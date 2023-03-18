@@ -5,6 +5,8 @@ import com.example.zoomarket.exp.IncorrectDateFormatException;
 import com.example.zoomarket.exp.LimitOutPutException;
 import com.example.zoomarket.exp.attach.*;
 import com.example.zoomarket.exp.auth.*;
+import com.example.zoomarket.exp.post.PostDeleteNotAllowedException;
+import com.example.zoomarket.exp.post.PostNotFoundException;
 import com.example.zoomarket.exp.post.like.PostAlreadyLikedException;
 import com.example.zoomarket.exp.post.type.PostTypeNotFoundException;
 import com.example.zoomarket.exp.profile.ProfileNotFoundException;
@@ -133,5 +135,15 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     @ExceptionHandler({PostAlreadyLikedException.class})
     private ResponseEntity<?> handler(PostAlreadyLikedException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({PostNotFoundException.class})
+    private ResponseEntity<?> handler(PostNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler({PostDeleteNotAllowedException.class})
+    private ResponseEntity<?> handler(PostDeleteNotAllowedException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
 }

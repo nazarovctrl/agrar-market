@@ -19,4 +19,6 @@ public class PostResponseDTO {
 
     private List<String> attachId;
     private Long profileId;
+    private Long likeCount;
+    private Boolean isLiked;
 }
