@@ -3,6 +3,7 @@ package com.example.zoomarket.controller;
 import com.example.zoomarket.dto.post.type.PostTypeCreateDTO;
 import com.example.zoomarket.dto.post.type.PostTypeResponseDTO;
 import com.example.zoomarket.service.PostTypeService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ public class PostTypeController {
         this.postTypeService = postTypeService;
     }
 
+    @Operation(summary = "Method for create post type", description = "This method used to create post type")
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<PostTypeResponseDTO> create(@Valid @RequestBody PostTypeCreateDTO postTypeCreateDTO) {
