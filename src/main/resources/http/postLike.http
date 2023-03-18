@@ -1,2 +1,3 @@
 ### CREATE POST LIKE
-POST http://localhost:8080/post/like/create?postId=1
+POST http://localhost:8080/post/like/create/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxNDkxNzYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIzNTU3NiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.coCDKMHx5RI-3lbehgwoiDfLQZFwdGpDMNLioR6diI8VN2PIE8jgdt8OS0YW1L03j4x20MwmE_7PxAEq4-Bn9A

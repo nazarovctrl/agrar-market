@@ -13,7 +13,7 @@ Content-Disposition: form-data; name="file"; filename="test.jpg"
 ### Register
 POST http://localhost:8080/auth/registration/998145008
 
-### Login
+### LOGIN USER
 PUT http://localhost:8080/auth/verification
 Content-Type: application/json
 

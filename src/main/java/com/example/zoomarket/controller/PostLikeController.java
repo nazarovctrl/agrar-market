@@ -22,8 +22,8 @@ public class PostLikeController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/create")
-    public ResponseEntity<Boolean> create(@RequestParam Long postId) {
+    @PostMapping("/create/{postId}")
+    public ResponseEntity<Boolean> create(@PathVariable Long postId) {
         Boolean result = postLikeService.create(getUserId(), postId);
         return ResponseEntity.ok(result);
     }
