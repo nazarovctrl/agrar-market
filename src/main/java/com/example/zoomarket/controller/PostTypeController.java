@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @Tag(name = "Post Type Controller", description = "This Controller for post type")
 @RestController
@@ -32,6 +34,22 @@ public class PostTypeController {
     @PostMapping("/create")
     public ResponseEntity<PostTypeResponseDTO> create(@Valid @RequestBody PostTypeCreateDTO postTypeCreateDTO) {
         PostTypeResponseDTO result = postTypeService.create(postTypeCreateDTO);
+        return ResponseEntity.ok(result);
+    }
+
+    @Operation(summary = "Method for get animal post types", description = "This method used to get animal post types")
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/get/animal")
+    public ResponseEntity<List<PostTypeResponseDTO>> getAnimals() {
+        List<PostTypeResponseDTO> result = postTypeService.getAnimalTypes();
+        return ResponseEntity.ok(result);
+    }
+
+    @Operation(summary = "Method for get plants post types", description = "This method used to get plant post types")
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/get/plant")
+    public ResponseEntity<List<PostTypeResponseDTO>> getPlants() {
+        List<PostTypeResponseDTO> result = postTypeService.getPlantTypes();
         return ResponseEntity.ok(result);
     }
 
