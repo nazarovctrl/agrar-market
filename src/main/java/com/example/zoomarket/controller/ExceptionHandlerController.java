@@ -5,6 +5,8 @@ import com.example.zoomarket.exp.IncorrectDateFormatException;
 import com.example.zoomarket.exp.LimitOutPutException;
 import com.example.zoomarket.exp.attach.*;
 import com.example.zoomarket.exp.auth.*;
+import com.example.zoomarket.exp.post.like.PostAlreadyLikedException;
+import com.example.zoomarket.exp.post.type.PostTypeNotFoundException;
 import com.example.zoomarket.exp.profile.ProfileNotFoundException;
 import com.example.zoomarket.exp.sms.SMSHistoryNotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -103,7 +105,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ProfileNotFoundException.class})
     private ResponseEntity<?> handler(ProfileNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
     @ExceptionHandler({AdminCreateNotAllowedException.class})
@@ -113,16 +115,23 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({IncorrectSMSCodeException.class})
     private ResponseEntity<?> handler(IncorrectSMSCodeException e) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
     @ExceptionHandler({PhoneNotFoundException.class})
     private ResponseEntity<?> handler(PhoneNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
     @ExceptionHandler({SMSHistoryNotFoundException.class})
     private ResponseEntity<?> handler(SMSHistoryNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
-
+    @ExceptionHandler({PostTypeNotFoundException.class})
+    private ResponseEntity<?> handler(PostTypeNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+    @ExceptionHandler({PostAlreadyLikedException.class})
+    private ResponseEntity<?> handler(PostAlreadyLikedException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 }

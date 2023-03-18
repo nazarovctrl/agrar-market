@@ -1,0 +1,9 @@
+### CREATE TYPE
+POST http://localhost:8080/post/type/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxNDg5NzgsInBob25lIjoiOTk4MzM5NTYxNjA4Iiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE2NzkyMzUzNzgsImlzcyI6Ik15SGVhbHRoIHRlc3QgcG9ydGFsaSJ9.ZLnlWQxw3Dqx5h-GDObruiZZuTmU7U3GJeUX8LI7RctQHFzbLd_S1P6J7AjECNKl0YRlkquq1xT7EUHZ194uwA
+Content-Type: application/json
+
+{
+  "name": "Cat",
+  "type": "ANIMAL"
+}

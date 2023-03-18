@@ -13,11 +13,20 @@ Content-Disposition: form-data; name="file"; filename="test.jpg"
 ### Register
 POST http://localhost:8080/auth/registration/998145008
 
-###Login
+### Login
 PUT http://localhost:8080/auth/verification
 Content-Type: application/json
 
 {
-  "phone": "998145007",
+  "phone": "998145008",
+  "code": "2222"
+}
+
+### LOGIN ADMIN
+PUT http://localhost:8080/auth/verification
+Content-Type: application/json
+
+{
+  "phone": "998339561608",
   "code": "2222"
 }

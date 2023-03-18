@@ -1,0 +1,2 @@
+### CREATE POST LIKE
+POST http://localhost:8080/post/like/create?postId=1

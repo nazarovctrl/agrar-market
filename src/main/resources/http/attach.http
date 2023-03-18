@@ -1,0 +1,9 @@
+### Upload file
+POST http://localhost:8080/attach/public/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test.jpg"
+
+< C:\Users\User\Pictures\kuchu.png
