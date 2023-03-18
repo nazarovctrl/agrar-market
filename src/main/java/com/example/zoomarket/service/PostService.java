@@ -2,10 +2,12 @@ package com.example.zoomarket.service;
 
 import com.example.zoomarket.dto.post.PostCreateDTO;
 import com.example.zoomarket.dto.post.PostResponseDTO;
+import com.example.zoomarket.dto.post.PostUpdateDTO;
 import com.example.zoomarket.entity.PostEntity;
 import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.exp.post.PostDeleteNotAllowedException;
 import com.example.zoomarket.exp.post.PostNotFoundException;
+import com.example.zoomarket.exp.post.PostUpdateNotAllowedException;
 import com.example.zoomarket.exp.post.type.PostTypeNotFoundException;
 import com.example.zoomarket.repository.PostRepository;
 import org.springframework.data.domain.Page;
@@ -145,5 +147,36 @@ public class PostService {
         response.setLikeCount(postEntity.getLikeCount());
         response.setIsLiked(postLikeService.isLiked(profileId, postEntity.getId()));
         return response;
+    }
+
+    public PostResponseDTO update(Long postId, Long profileId, PostUpdateDTO dto) {
+        Optional<PostEntity> byId = postRepository.findById(postId);
+        if (byId.isEmpty()) {
+            throw new PostNotFoundException("Post not found");
+        }
+
+        PostEntity postEntity = byId.get();
+        if (!postEntity.getProfileId().equals(profileId)) {
+            throw new PostUpdateNotAllowedException("Post update not allowed");
+        }
+
+        postEntity.setTypeId(dto.getTypeId());
+        postEntity.setTitle(dto.getTitle());
+        postEntity.setPrice(dto.getPrice());
+        postEntity.setPhone(dto.getPhone());
+        postEntity.setLocation(dto.getLocation());
+        postEntity.setDescription(dto.getDescription());
+        postEntity.setProfileId(profileId);
+        postRepository.save(postEntity);
+
+        postPhotoService.deletePhotosByPostId(postId);
+
+        List<String> attachId = dto.getAttachId();
+        for (String attach : attachId) {
+            postPhotoService.create(postEntity.getId(), attach);
+        }
+
+
+        return toPostResponse(postEntity, profileId);
     }
 }

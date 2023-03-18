@@ -2,6 +2,7 @@ package com.example.zoomarket.controller;
 
 import com.example.zoomarket.dto.post.PostCreateDTO;
 import com.example.zoomarket.dto.post.PostResponseDTO;
+import com.example.zoomarket.dto.post.PostUpdateDTO;
 import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +33,14 @@ public class PostController {
     @PostMapping("/create")
     public ResponseEntity<PostResponseDTO> create(@Valid @RequestBody PostCreateDTO postCreateDTO) {
         PostResponseDTO result = postService.create(getUserId(), postCreateDTO);
+        return ResponseEntity.ok(result);
+    }
+
+    @Operation(summary = "Method for update post", description = "This method used to update post")
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/update/{postId}")
+    public ResponseEntity<PostResponseDTO> update(@PathVariable Long postId, @Valid @RequestBody PostUpdateDTO dto) {
+        PostResponseDTO result = postService.update(postId, getUserId(), dto);
         return ResponseEntity.ok(result);
     }
 

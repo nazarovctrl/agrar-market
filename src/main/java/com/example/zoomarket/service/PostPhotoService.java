@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostPhotoService {
@@ -16,12 +17,23 @@ public class PostPhotoService {
     }
 
     public Long create(Long postId, String attachId) {
+        Optional<PostPhotoEntity> byPostIdAndAndAttachId = postPhotoRepository.findByPostIdAndAttachId(postId, attachId);
+        if (byPostIdAndAndAttachId.isPresent()) {
+            return byPostIdAndAndAttachId.get().getId();
+        }
+
         PostPhotoEntity postPhoto = new PostPhotoEntity();
         postPhoto.setAttachId(attachId);
         postPhoto.setPostId(postId);
         postPhotoRepository.save(postPhoto);
 
         return postPhoto.getId();
+    }
+
+    public Boolean deletePhotosByPostId(Long postId) {
+        // TODO HOTIRADAN HAM O'CHIRISH
+        postPhotoRepository.deleteByPostId(postId);
+        return true;
     }
 
     public List<String> getPhotosByPostId(Long postId) {
