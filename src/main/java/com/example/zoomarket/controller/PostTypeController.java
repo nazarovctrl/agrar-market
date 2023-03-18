@@ -11,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class PostTypeController {
 
     @Operation(summary = "Method for get animal post types", description = "This method used to get animal post types")
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/get/animal")
+    @GetMapping("/get/animal")
     public ResponseEntity<List<PostTypeResponseDTO>> getAnimals() {
         List<PostTypeResponseDTO> result = postTypeService.getAnimalTypes();
         return ResponseEntity.ok(result);
@@ -47,7 +44,7 @@ public class PostTypeController {
 
     @Operation(summary = "Method for get plants post types", description = "This method used to get plant post types")
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/get/plant")
+    @GetMapping("/get/plant")
     public ResponseEntity<List<PostTypeResponseDTO>> getPlants() {
         List<PostTypeResponseDTO> result = postTypeService.getPlantTypes();
         return ResponseEntity.ok(result);

@@ -9,9 +9,9 @@ Content-Type: application/json
 }
 
 ### GET ANIMAL TYPES
-POST http://localhost:8080/post/type/get/animal
+GET http://localhost:8080/post/type/get/animal
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxNjg4ODYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTI1NTI4NiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.pMqktlheCVIg0VhfJnRfhPfCGWX-ht5E6znQFKg5-eEnrH9gmHIW27MIs3RVlTC5Pd2-LPlAdVxAA3ZUvdzgSA
 
 ### GET PLANT TYPES
-POST http://localhost:8080/post/type/get/plant
+GET http://localhost:8080/post/type/get/plant
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxNjg4ODYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTI1NTI4NiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.pMqktlheCVIg0VhfJnRfhPfCGWX-ht5E6znQFKg5-eEnrH9gmHIW27MIs3RVlTC5Pd2-LPlAdVxAA3ZUvdzgSA
