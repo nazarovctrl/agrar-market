@@ -27,7 +27,7 @@ public class AuthController {
 
 
     @Operation(summary = "Method for registration", description = "This method used to create a user")
-    @PostMapping("/registration/{phone}")
+    @PostMapping("/authorization/{phone}")
     private ResponseEntity<ProfileResponseDTO> registration(@PathVariable("phone") String phone) {
         log.info("Registration : phone {}", phone);
 
@@ -40,7 +40,9 @@ public class AuthController {
     @PutMapping("/verification")
     private ResponseEntity<AuthResponseDTO> verification(@Valid @RequestBody VerificationDTO verificationDTO) {
         log.info("Verification:dto {}", verificationDTO.toString());
+
         AuthResponseDTO result = service.verification(verificationDTO);
+
         return ResponseEntity.ok(result);
     }
 

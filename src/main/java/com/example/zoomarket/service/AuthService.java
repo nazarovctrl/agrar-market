@@ -13,7 +13,6 @@ import com.example.zoomarket.repository.ProfileRepository;
 import com.example.zoomarket.util.JwtUtil;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -23,9 +22,6 @@ import java.util.Optional;
 @Service
 public class AuthService {
     private final ProfileRepository repository;
-
-    @Value("${app.url}")
-    private String appUrl;
     private final SMSService phoneService;
     private final SMSHistoryService phoneHistoryService;
 
@@ -60,24 +56,7 @@ public class AuthService {
         repository.save(entity);
 
         //TODO send sms
-//        Thread thread = new Thread() {
-//            @Override
-//            public synchronized void start() {
-//                String sb = "Salom qalaysan \n" +
-//                        "Bu test message" +
-//                        "Click the link : " + appUrl + "/auth/verification/email/" +
-//                        JwtUtil.encode(entity.getPhone(), ProfileRole.ROLE_USER);
-//                mailService.sendSMS(dto.getPhone(), "Complete Registration", sb);
-//
-//                PhoneHistoryEntity emailHistoryEntity = new PhoneHistoryEntity();
-//                emailHistoryEntity.setPhone(dto.getPhone());
-//                emailHistoryEntity.setMessage(sb);
-//                emailHistoryEntity.setCreatedDate(LocalDateTime.now());
-//
-//                emailHistoryService.create(emailHistoryEntity);
-//            }
-//        };
-//        thread.start();
+
 
         return getDTO(entity);
 

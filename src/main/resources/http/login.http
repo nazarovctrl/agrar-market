@@ -1,12 +1,25 @@
+### Upload file
+POST http://localhost:8080/attach/public/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test.jpg"
+
+< C:\Users\User\Pictures\Camera Roll\test.jpg
+
+
+
 ### Register
-POST http://localhost:8080/auth/registration/998145008
+POST http://localhost:8080/auth/authorization/998145004
+
 
 ### LOGIN USER
 PUT http://localhost:8080/auth/verification
 Content-Type: application/json
 
 {
-  "phone": "998145008",
+  "phone": "998145004",
   "code": "2222"
 }
 

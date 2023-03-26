@@ -12,8 +12,6 @@ public class JwtUtil {
     private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
 
     public static String encode(String phone, ProfileRole role) {
-        StringBuilder stringBuilder=new StringBuilder();
-
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setIssuedAt(new Date());
         jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
