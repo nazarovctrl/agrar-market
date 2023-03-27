@@ -4,6 +4,7 @@ import com.example.zoomarket.dto.post.type.PostTypeCreateDTO;
 import com.example.zoomarket.dto.post.type.PostTypeResponseDTO;
 import com.example.zoomarket.service.PostTypeService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ public class PostTypeController {
         this.postTypeService = postTypeService;
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for create post type", description = "This method used to create post type")
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
@@ -34,6 +36,7 @@ public class PostTypeController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get animal post types", description = "This method used to get animal post types")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/animal")
@@ -42,6 +45,7 @@ public class PostTypeController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get plants post types", description = "This method used to get plant post types")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/plant")
