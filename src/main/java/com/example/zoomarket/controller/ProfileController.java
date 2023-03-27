@@ -46,6 +46,7 @@ public class ProfileController {
         Boolean result = profileService.editFullName(getUserId(), fullName);
         return ResponseEntity.ok(result);
     }
+
     @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @PutMapping("/phone/{phone}")
@@ -56,6 +57,7 @@ public class ProfileController {
         Boolean result = profileService.changePhone(userId, phone);
         return ResponseEntity.ok(result);
     }
+
     @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @PutMapping("/email/{email}")

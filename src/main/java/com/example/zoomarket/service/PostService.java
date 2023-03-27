@@ -42,6 +42,7 @@ public class PostService {
         if (!postTypeService.isPostTypeExists(dto.getTypeId())) {
             throw new PostTypeNotFoundException("Post type not found");
         }
+
         postEntity.setTypeId(dto.getTypeId());
         postEntity.setTitle(dto.getTitle());
         postEntity.setPrice(dto.getPrice());
@@ -160,6 +161,8 @@ public class PostService {
             throw new PostUpdateNotAllowedException("Post update not allowed");
         }
 
+        //TODO  Safarboy dynamic query qil yoki if bn tekshir null bomasa set qil
+
         postEntity.setTypeId(dto.getTypeId());
         postEntity.setTitle(dto.getTitle());
         postEntity.setPrice(dto.getPrice());
@@ -172,10 +175,11 @@ public class PostService {
         postPhotoService.deletePhotosByPostId(postId);
 
         List<String> attachId = dto.getAttachId();
-        for (String attach : attachId) {
-            postPhotoService.create(postEntity.getId(), attach);
+        if(attachId!=null||!attachId.isEmpty()) {
+            for (String attach : attachId) {
+                postPhotoService.create(postEntity.getId(), attach);
+            }
         }
-
 
         return toPostResponse(postEntity, profileId);
     }

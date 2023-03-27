@@ -19,9 +19,7 @@ public class SMSHistoryEntity {
     @Column
     private String phone;
     @Column
-
     private String code;
     @Column(name = "created_date")
-
     private LocalDateTime createdDate = LocalDateTime.now();
 }

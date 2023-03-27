@@ -1,6 +1,5 @@
 package com.example.zoomarket.service;
 
-
 import com.example.zoomarket.dto.auth.AuthResponseDTO;
 import com.example.zoomarket.dto.auth.VerificationDTO;
 import com.example.zoomarket.dto.profile.ProfileResponseDTO;
@@ -22,14 +21,14 @@ import java.util.Optional;
 @Service
 public class AuthService {
     private final ProfileRepository repository;
-    private final SMSService phoneService;
-    private final SMSHistoryService phoneHistoryService;
+    private final SMSService smsService;
+    private final SMSHistoryService smsHistoryService;
 
 
-    public AuthService(ProfileRepository repository, SMSService phoneService, SMSHistoryService phoneHistoryService) {
+    public AuthService(ProfileRepository repository, SMSService smsService, SMSHistoryService smsHistoryService) {
         this.repository = repository;
-        this.phoneService = phoneService;
-        this.phoneHistoryService = phoneHistoryService;
+        this.smsService = smsService;
+        this.smsHistoryService = smsHistoryService;
 
     }
 
@@ -44,7 +43,7 @@ public class AuthService {
             }
         }
 
-        Long countInMinute = phoneHistoryService.getCountInMinute(phone);
+        Long countInMinute = smsHistoryService.getCountInMinute(phone);
         if (countInMinute > 4) {
             throw new LimitOutPutException("Resent limit");
         }
@@ -94,7 +93,7 @@ public class AuthService {
         //TODO  ob tashash kere sms provider ulangandan keyin mazgi
         if (!dto.getCode().equals("2222")) {
 
-            if (!phoneHistoryService.check(dto.getPhone(), dto.getCode())) {
+            if (!smsHistoryService.check(dto.getPhone(), dto.getCode())) {
                 throw new IncorrectSMSCodeException("Incorrect sms code");
             }
         }

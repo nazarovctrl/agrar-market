@@ -1,6 +1,7 @@
 package com.example.zoomarket.controller;
 
 
+import com.example.zoomarket.dto.attach.AttachDownloadDTO;
 import com.example.zoomarket.dto.attach.AttachResponseDTO;
 import com.example.zoomarket.service.AttachService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,16 +32,16 @@ public class AttachController {
     @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @Operation(summary = "Method for upload", description = "This method used to  upload file")
-    @PostMapping("/public/upload")
+    @PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) {
         AttachResponseDTO fileName = service.saveToSystem(file);
         return ResponseEntity.ok().body(fileName);
     }
 
     @SecurityRequirement(name = "Bearer Authentication")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Method for open", description = "This method used to  open file")
-    @GetMapping(value = "/public/open/{fileName}", produces = MediaType.ALL_VALUE)
+    @GetMapping(value = "/open/{fileName}", produces = MediaType.ALL_VALUE)
     public byte[] open(@PathVariable("fileName") String fileName) {
         return service.open(fileName);
     }
@@ -49,11 +50,13 @@ public class AttachController {
     @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @Operation(summary = "Method for download", description = "This method used to  download file")
-    @GetMapping("/public/download/{fineName}")
+    @GetMapping("/download/{fineName}")
     public ResponseEntity<Resource> download(@PathVariable("fineName") String fileName) {
-        Resource file = service.download(fileName);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+       AttachDownloadDTO result = service.download(fileName);
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(result.getContentType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + result.getResource().getFilename() + "\"").body(result.getResource());
     }
 
 

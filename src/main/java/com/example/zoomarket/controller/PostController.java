@@ -56,6 +56,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get post by id", description = "This method used to get post by id")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/{id}")
