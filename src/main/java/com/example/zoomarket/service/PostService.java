@@ -119,6 +119,7 @@ public class PostService {
 
         return new PageImpl<>(result, pageable, pageObj.getTotalElements());
     }
+
     public Page<PostResponseDTO> getProfilePostsByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
@@ -163,19 +164,36 @@ public class PostService {
 
         //TODO  Safarboy dynamic query qil yoki if bn tekshir null bomasa set qil
 
-        postEntity.setTypeId(dto.getTypeId());
-        postEntity.setTitle(dto.getTitle());
-        postEntity.setPrice(dto.getPrice());
-        postEntity.setPhone(dto.getPhone());
-        postEntity.setLocation(dto.getLocation());
-        postEntity.setDescription(dto.getDescription());
-        postEntity.setProfileId(profileId);
+        if (dto.getTypeId() != null) {
+            postEntity.setTypeId(dto.getTypeId());
+        }
+
+        if (dto.getTitle() != null && !dto.getTitle().isBlank()) {
+            postEntity.setTitle(dto.getTitle());
+        }
+
+        if (dto.getPrice() != null && dto.getPrice() >= 0) {
+            postEntity.setPrice(dto.getPrice());
+        }
+
+        if (dto.getPhone() != null && !dto.getPhone().isBlank()) {
+            postEntity.setPhone(dto.getPhone());
+        }
+
+        if (dto.getLocation() != null && !dto.getLocation().isBlank()) {
+            postEntity.setLocation(dto.getLocation());
+        }
+
+        if (dto.getDescription() != null && !dto.getDescription().isBlank()) {
+            postEntity.setDescription(dto.getDescription());
+        }
+
         postRepository.save(postEntity);
 
-        postPhotoService.deletePhotosByPostId(postId);
 
         List<String> attachId = dto.getAttachId();
-        if(attachId!=null||!attachId.isEmpty()) {
+        if (attachId != null && !attachId.isEmpty()) {
+            postPhotoService.deletePhotosByPostId(postId);
             for (String attach : attachId) {
                 postPhotoService.create(postEntity.getId(), attach);
             }

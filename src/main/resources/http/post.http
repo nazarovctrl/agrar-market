@@ -16,20 +16,12 @@ Content-Type: application/json
 }
 
 ### POST UPDATE
-POST http://localhost:8080/post/update/4
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw
+PUT http://localhost:8080/post/update/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Nzk5MjYxMjAsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MDAxMjUyMCwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.xhExLYpmcr7NUSw_KerhCwlN326QqBayB6iYvT0gLETU6wp2qMuqHRPXb3Tfp0WQpwKLhZgvyvZpERwgU0lEcA
 Content-Type: application/json
 
 {
-  "typeId": 1,
-  "attachId": [
-    "57eecc01-e26f-4ea6-ae60-4263a6d039d2"
-  ],
-  "title": "alabay",
-  "price": 1.0,
-  "phone": "998145008",
-  "location": "Tashkent, Uzbekistan",
-  "description": "Zo'r kuchuk"
+  "typeId": 1
 }
 
 

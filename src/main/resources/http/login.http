@@ -19,7 +19,7 @@ PUT http://localhost:8080/auth/verification
 Content-Type: application/json
 
 {
-  "phone": "998145004",
+  "phone": "998145008",
   "code": "2222"
 }
 
