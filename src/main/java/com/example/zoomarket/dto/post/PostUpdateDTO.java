@@ -22,7 +22,6 @@ public class PostUpdateDTO {
 
     private Double price;
 
-
     private String phone;
 
     private String location;
