@@ -1,6 +1,7 @@
 package com.example.zoomarket.controller;
 
 
+import com.example.zoomarket.dto.attach.AttachDownloadDTO;
 import com.example.zoomarket.dto.attach.AttachResponseDTO;
 import com.example.zoomarket.service.AttachService;
 import io.swagger.v3.oas.annotations.Operation;
