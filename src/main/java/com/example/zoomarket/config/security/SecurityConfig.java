@@ -57,7 +57,6 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
                 .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/attach/public/**").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
