@@ -1,12 +1,10 @@
 package com.example.zoomarket.service;
 
-import com.example.zoomarket.dto.attach.AttachDownloadDTO;
 import com.example.zoomarket.dto.attach.AttachResponseDTO;
 import com.example.zoomarket.entity.AttachEntity;
 import com.example.zoomarket.exp.attach.*;
 import com.example.zoomarket.repository.AttachRepository;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
