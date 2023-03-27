@@ -9,7 +9,7 @@ import java.util.Date;
 public class JwtUtil {
 
     private static final String secretKey = "topsecretKey!123";
-    private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
+    private static final int tokenLiveTime = 1000*3600*24; // 1-day
 
     public static String encode(String phone, ProfileRole role) {
         JwtBuilder jwtBuilder = Jwts.builder();

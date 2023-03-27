@@ -4,6 +4,7 @@ import com.example.zoomarket.config.security.CustomUserDetails;
 import com.example.zoomarket.dto.profile.ProfileDetailDTO;
 import com.example.zoomarket.service.ProfileService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/detail")
     @Operation(summary = "Method for get detail", description = "This method used to get detail ")
@@ -34,7 +36,7 @@ public class ProfileController {
         return ResponseEntity.ok(result);
     }
 
-
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @PutMapping("/full_name/{full_name}")
     @Operation(summary = "Method for edit full name", description = "This method used to edit full name ")
@@ -44,7 +46,7 @@ public class ProfileController {
         Boolean result = profileService.editFullName(getUserId(), fullName);
         return ResponseEntity.ok(result);
     }
-
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @PutMapping("/phone/{phone}")
     @Operation(summary = "Method for change phone", description = "This method used to change phone")
@@ -54,7 +56,7 @@ public class ProfileController {
         Boolean result = profileService.changePhone(userId, phone);
         return ResponseEntity.ok(result);
     }
-
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @PutMapping("/email/{email}")
     @Operation(summary = "Method for change email", description = "This method used change email")
@@ -65,6 +67,7 @@ public class ProfileController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @PutMapping("/photo/{photo_id}")
     @Operation(summary = "Method for change photo", description = "This method used to change photo")

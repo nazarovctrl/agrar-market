@@ -1,8 +1,8 @@
 package com.example.zoomarket.controller;
 
 
-import com.example.zoomarket.exp.IncorrectDateFormatException;
-import com.example.zoomarket.exp.LimitOutPutException;
+import com.example.zoomarket.exp.sms.IncorrectDateFormatException;
+import com.example.zoomarket.exp.sms.LimitOutPutException;
 import com.example.zoomarket.exp.attach.*;
 import com.example.zoomarket.exp.auth.*;
 import com.example.zoomarket.exp.post.PostDeleteNotAllowedException;

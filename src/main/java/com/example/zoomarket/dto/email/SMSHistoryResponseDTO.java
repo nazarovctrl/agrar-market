@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 
-public class PhoneHistoryResponseDTO {
+public class SMSHistoryResponseDTO {
     private Integer id;
     private String phone;
     private String message;

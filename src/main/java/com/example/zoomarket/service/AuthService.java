@@ -7,8 +7,8 @@ import com.example.zoomarket.dto.profile.ProfileResponseDTO;
 import com.example.zoomarket.entity.ProfileEntity;
 import com.example.zoomarket.enums.ProfileRole;
 import com.example.zoomarket.enums.ProfileStatus;
-import com.example.zoomarket.exp.*;
 import com.example.zoomarket.exp.auth.*;
+import com.example.zoomarket.exp.sms.LimitOutPutException;
 import com.example.zoomarket.repository.ProfileRepository;
 import com.example.zoomarket.util.JwtUtil;
 
