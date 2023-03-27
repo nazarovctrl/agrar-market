@@ -103,11 +103,12 @@ public class AuthService {
 
         repository.save(entity);
 
-        AuthResponseDTO responseDTO = new AuthResponseDTO();
-        responseDTO.setRole(entity.getRole());
-        responseDTO.setToken(JwtUtil.encode(entity.getPhone(), entity.getRole()));
 
-        return responseDTO;
+        return AuthResponseDTO.builder()
+                .role(entity.getRole())
+                .accessToken(JwtUtil.encodeAccessToken(entity.getPhone(), entity.getRole()))
+                .refreshToken(JwtUtil.encodeRefreshToken(entity.getPhone(), entity.getRole()))
+                .build();
 
     }
 }

@@ -125,14 +125,17 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> handler(PhoneNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
     @ExceptionHandler({SMSHistoryNotFoundException.class})
     private ResponseEntity<?> handler(SMSHistoryNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
     @ExceptionHandler({PostTypeNotFoundException.class})
     private ResponseEntity<?> handler(PostTypeNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
     @ExceptionHandler({PostAlreadyLikedException.class})
     private ResponseEntity<?> handler(PostAlreadyLikedException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -150,6 +153,11 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({PostUpdateNotAllowedException.class})
     private ResponseEntity<?> handler(PostUpdateNotAllowedException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    }
+
+    @ExceptionHandler({JWTTokenExpiredException.class})
+    private ResponseEntity<?> handler(JWTTokenExpiredException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
 }

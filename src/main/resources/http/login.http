@@ -31,3 +31,7 @@ Content-Type: application/json
   "phone": "998339561608",
   "code": "2222"
 }
+
+#### refresh token
+GET localhost:8080/auth/token/refresh
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwicGhvbmUiOiI5OTgxNDUwMDgiLCJleHAiOjE2Nzk5MzY5OTMsImlhdCI6MTY3OTkzNDU5M30.KWn3GdVYxCYjV1ezxUnI3OWN9mN0dwxPoex_z7mAzRy7wqgBCdZZXoLuOTa67ZDzjTIM1EfAWkkyUYfrLzh_3g
