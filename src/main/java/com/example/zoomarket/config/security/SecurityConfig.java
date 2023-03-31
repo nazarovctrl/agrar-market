@@ -21,15 +21,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
     private CustomUserDetailService customUserDetailService;
-
     private JwtFilter jwtFilter;
-
     private AuthenticationEntryPoint authenticationEntryPoint;
-
+    @Autowired
+    public SecurityConfig(CustomUserDetailService customUserDetailService, JwtFilter jwtFilter,AuthenticationEntryPoint authenticationEntryPoint){
+        this.customUserDetailService = customUserDetailService;
+        this.jwtFilter = jwtFilter;
+        this.authenticationEntryPoint = authenticationEntryPoint;
+    }
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",
             "/configuration/ui",
