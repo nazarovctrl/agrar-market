@@ -6,6 +6,7 @@ import com.example.zoomarket.entity.ProfileEntity;
 import com.example.zoomarket.enums.ProfileStatus;
 import com.example.zoomarket.exp.profile.ProfileNotFoundException;
 import com.example.zoomarket.repository.ProfileRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @Service
 public class ProfileService {
     private final ProfileRepository profileRepository;
-
+    @Autowired
     public ProfileService(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
     }

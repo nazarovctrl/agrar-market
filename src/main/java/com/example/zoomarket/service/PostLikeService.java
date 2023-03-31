@@ -5,6 +5,7 @@ import com.example.zoomarket.entity.PostLikeEntity;
 import com.example.zoomarket.exp.post.like.PostAlreadyLikedException;
 import com.example.zoomarket.exp.post.like.PostNotLikedException;
 import com.example.zoomarket.repository.PostLikeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Service
 public class PostLikeService {
     private final PostLikeRepository postLikeRepository;
-
+    @Autowired
     public PostLikeService(PostLikeRepository postLikeRepository) {
         this.postLikeRepository = postLikeRepository;
     }

@@ -13,6 +13,7 @@ import com.example.zoomarket.repository.ProfileRepository;
 import com.example.zoomarket.util.JwtUtil;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -25,7 +26,7 @@ public class AuthService {
     private final SMSService phoneService;
     private final SMSHistoryService phoneHistoryService;
 
-
+    @Autowired
     public AuthService(ProfileRepository repository, SMSService phoneService, SMSHistoryService phoneHistoryService) {
         this.repository = repository;
         this.phoneService = phoneService;

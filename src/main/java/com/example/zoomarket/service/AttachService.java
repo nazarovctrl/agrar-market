@@ -5,6 +5,7 @@ import com.example.zoomarket.entity.AttachEntity;
 import com.example.zoomarket.exp.attach.*;
 import com.example.zoomarket.repository.AttachRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -35,7 +36,7 @@ public class AttachService {
     @Value("${attach.download.url}")
     private String attachDownloadUrl;
 
-
+    @Autowired
     public AttachService(AttachRepository attachRepository) {
         this.repository = attachRepository;
     }

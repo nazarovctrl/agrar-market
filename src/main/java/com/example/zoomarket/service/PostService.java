@@ -10,6 +10,8 @@ import com.example.zoomarket.exp.post.PostNotFoundException;
 import com.example.zoomarket.exp.post.PostUpdateNotAllowedException;
 import com.example.zoomarket.exp.post.type.PostTypeNotFoundException;
 import com.example.zoomarket.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class PostService {
     private final PostRepository postRepository;
 
@@ -28,7 +31,7 @@ public class PostService {
 
     private final PostPhotoService postPhotoService;
     private final PostLikeService postLikeService;
-
+    @Autowired
     public PostService(PostRepository postRepository, PostTypeService postTypeService, PostPhotoService postPhotoService, PostLikeService postLikeService) {
         this.postRepository = postRepository;
         this.postTypeService = postTypeService;

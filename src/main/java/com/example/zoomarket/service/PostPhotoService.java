@@ -2,6 +2,7 @@ package com.example.zoomarket.service;
 
 import com.example.zoomarket.entity.PostPhotoEntity;
 import com.example.zoomarket.repository.PostPhotoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -11,7 +12,7 @@ import java.util.Optional;
 @Service
 public class PostPhotoService {
     private final PostPhotoRepository postPhotoRepository;
-
+    @Autowired
     public PostPhotoService(PostPhotoRepository postPhotoRepository) {
         this.postPhotoRepository = postPhotoRepository;
     }
