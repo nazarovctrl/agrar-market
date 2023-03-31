@@ -1,5 +1,6 @@
 package com.example.zoomarket.config.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,13 +22,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    @Autowired
-    private CustomUserDetailService customUserDetailService;
-    @Autowired
-    private JwtFilter jwtFilter;
-    @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
 
+    private CustomUserDetailService customUserDetailService;
+    private JwtFilter jwtFilter;
+    private AuthenticationEntryPoint authenticationEntryPoint;
+    @Autowired
+    public SecurityConfig(CustomUserDetailService customUserDetailService, JwtFilter jwtFilter,AuthenticationEntryPoint authenticationEntryPoint){
+        this.customUserDetailService = customUserDetailService;
+        this.jwtFilter = jwtFilter;
+        this.authenticationEntryPoint = authenticationEntryPoint;
+    }
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",
             "/configuration/ui",

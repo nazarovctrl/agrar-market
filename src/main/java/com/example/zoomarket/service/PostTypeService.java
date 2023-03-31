@@ -5,6 +5,7 @@ import com.example.zoomarket.dto.post.type.PostTypeResponseDTO;
 import com.example.zoomarket.entity.PostTypeEntity;
 import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.repository.PostTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -13,7 +14,7 @@ import java.util.List;
 @Service
 public class PostTypeService {
     private final PostTypeRepository postTypeRepository;
-
+    @Autowired
     public PostTypeService(PostTypeRepository postTypeRepository) {
         this.postTypeRepository = postTypeRepository;
     }

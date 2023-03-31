@@ -7,6 +7,7 @@ import com.example.zoomarket.service.AttachService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AttachController {
 
     private final AttachService service;
-
+    @Autowired
     public AttachController(AttachService service) {
         this.service = service;
     }
