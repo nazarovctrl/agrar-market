@@ -2,6 +2,7 @@ package com.example.zoomarket.config.security;
 
 import com.example.zoomarket.entity.ProfileEntity;
 import com.example.zoomarket.repository.ProfileRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,8 +13,9 @@ import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
-    @Autowired
+
     private ProfileRepository profileRepository;
 
     @Override

@@ -6,6 +6,7 @@ import com.example.zoomarket.entity.SMSHistoryEntity;
 import com.example.zoomarket.exp.sms.IncorrectDateFormatException;
 import com.example.zoomarket.exp.sms.SMSHistoryNotFoundException;
 import com.example.zoomarket.repository.SMSHistoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.util.Optional;
 @Service
 public class SMSHistoryService {
     private final SMSHistoryRepository repository;
-
+    @Autowired
     public SMSHistoryService(SMSHistoryRepository repository) {
         this.repository = repository;
     }

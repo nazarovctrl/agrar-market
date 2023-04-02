@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping("/post/type")
 public class PostTypeController {
     private final PostTypeService postTypeService;
-
+    @Autowired
     public PostTypeController(PostTypeService postTypeService) {
         this.postTypeService = postTypeService;
     }

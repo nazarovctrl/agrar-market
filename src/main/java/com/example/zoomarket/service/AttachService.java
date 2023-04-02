@@ -1,12 +1,11 @@
 package com.example.zoomarket.service;
 
-import com.example.zoomarket.dto.attach.AttachDownloadDTO;
 import com.example.zoomarket.dto.attach.AttachResponseDTO;
 import com.example.zoomarket.entity.AttachEntity;
 import com.example.zoomarket.exp.attach.*;
 import com.example.zoomarket.repository.AttachRepository;
 
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -37,7 +36,7 @@ public class AttachService {
     @Value("${attach.download.url}")
     private String attachDownloadUrl;
 
-
+    @Autowired
     public AttachService(AttachRepository attachRepository) {
         this.repository = attachRepository;
     }
@@ -63,8 +62,6 @@ public class AttachService {
 
     public AttachResponseDTO saveToSystem(MultipartFile file) {
         try {
-
-            System.out.println(file.getContentType());
 
             String pathFolder = getYmDString(); // 2022/04/23
             File folder = new File(attachUploadFolder + pathFolder); // attaches/2022/04/23
@@ -148,7 +145,7 @@ public class AttachService {
     }
 
 
-    public AttachDownloadDTO download(String fileName) {
+    public Resource download(String fileName) {
         try {
             AttachEntity entity = getAttach(fileName);
 
@@ -156,12 +153,12 @@ public class AttachService {
             File file = new File(attachUploadFolder + entity.getPath() + "/" + fileName);
 
             File dir = file.getParentFile();
-            File rFile = new File(dir, entity.getId() + "." + entity.getType());
+            File rFile = new File(dir, entity.getOriginName());
 
             Resource resource = new UrlResource(rFile.toURI());
 
             if (resource.exists() || resource.isReadable()) {
-                return new AttachDownloadDTO(resource, entity.getContentType());
+                return resource;
             } else {
                 throw new CouldNotRead("Could not read");
             }
