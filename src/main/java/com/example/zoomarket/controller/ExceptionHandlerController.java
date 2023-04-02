@@ -9,7 +9,7 @@ import com.example.zoomarket.exp.post.PostDeleteNotAllowedException;
 import com.example.zoomarket.exp.post.PostNotFoundException;
 import com.example.zoomarket.exp.post.PostUpdateNotAllowedException;
 import com.example.zoomarket.exp.post.like.PostAlreadyLikedException;
-import com.example.zoomarket.exp.post.type.PostTypeNotFoundException;
+import com.example.zoomarket.exp.post.category.CategoryNotFoundException;
 import com.example.zoomarket.exp.profile.ProfileNotFoundException;
 import com.example.zoomarket.exp.sms.SMSHistoryNotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -131,8 +131,8 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
-    @ExceptionHandler({PostTypeNotFoundException.class})
-    private ResponseEntity<?> handler(PostTypeNotFoundException e) {
+    @ExceptionHandler({CategoryNotFoundException.class})
+    private ResponseEntity<?> handler(CategoryNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 

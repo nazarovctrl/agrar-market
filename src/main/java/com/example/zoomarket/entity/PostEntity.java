@@ -20,7 +20,7 @@ public class PostEntity {
 
     @ManyToOne
     @JoinColumn(name = "type_id", insertable = false, updatable = false)
-    private PostTypeEntity type;
+    private TypeEntity type;
 
     @Column(name = "profile_id")
     private Long profileId;

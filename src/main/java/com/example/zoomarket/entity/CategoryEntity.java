@@ -11,10 +11,17 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table
-public class PostTypeEntity {
+public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "attach_id")
+    private String attachId;
+
+    @ManyToOne
+    @JoinColumn(name = "attach_id", insertable = false, updatable = false)
+    private AttachEntity attach;
 
     @Column
     private String name;

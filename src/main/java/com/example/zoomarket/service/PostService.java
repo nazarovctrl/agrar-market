@@ -8,7 +8,7 @@ import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.exp.post.PostDeleteNotAllowedException;
 import com.example.zoomarket.exp.post.PostNotFoundException;
 import com.example.zoomarket.exp.post.PostUpdateNotAllowedException;
-import com.example.zoomarket.exp.post.type.PostTypeNotFoundException;
+import com.example.zoomarket.exp.post.category.CategoryNotFoundException;
 import com.example.zoomarket.repository.PostRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -24,14 +24,14 @@ import java.util.Optional;
 public class PostService {
     private final PostRepository postRepository;
 
-    private final PostTypeService postTypeService;
+    private final TypeService typeService;
 
     private final PostPhotoService postPhotoService;
     private final PostLikeService postLikeService;
 
-    public PostService(PostRepository postRepository, PostTypeService postTypeService, PostPhotoService postPhotoService, PostLikeService postLikeService) {
+    public PostService(PostRepository postRepository, TypeService typeService, PostPhotoService postPhotoService, PostLikeService postLikeService) {
         this.postRepository = postRepository;
-        this.postTypeService = postTypeService;
+        this.typeService = typeService;
         this.postPhotoService = postPhotoService;
         this.postLikeService = postLikeService;
     }
@@ -39,8 +39,8 @@ public class PostService {
     public PostResponseDTO create(Long profileId, PostCreateDTO dto) {
         PostEntity postEntity = new PostEntity();
 
-        if (!postTypeService.isPostTypeExists(dto.getTypeId())) {
-            throw new PostTypeNotFoundException("Post type not found");
+        if (!typeService.isPostTypeExists(dto.getTypeId())) {
+            throw new CategoryNotFoundException("Post type not found");
         }
 
         postEntity.setTypeId(dto.getTypeId());
@@ -108,7 +108,7 @@ public class PostService {
     public Page<PostResponseDTO> getAllByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndTypeTypeOrderByLikeCountDesc(pageable, type);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndTypeCategoryTypeOrderByLikeCountDesc(pageable, type);
 
         List<PostEntity> content = pageObj.getContent();
 
@@ -123,7 +123,7 @@ public class PostService {
     public Page<PostResponseDTO> getProfilePostsByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndProfileIdAndTypeTypeOrderByLikeCountDesc(pageable, profileId, type);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndProfileIdAndTypeCategoryTypeOrderByLikeCountDesc(pageable, profileId, type);
 
         List<PostEntity> content = pageObj.getContent();
 

@@ -126,13 +126,16 @@ public class AttachService {
 
     private AttachEntity getAttach(String fileName) {
         String id = fileName.split("\\.")[0];
+        return findById(fileName);
+    }
+
+    public AttachEntity findById(String id) {
         Optional<AttachEntity> optional = repository.findById(id);
         if (optional.isEmpty()) {
             throw new FileNotFoundException("File Not Found");
         }
         return optional.get();
     }
-
 
     public byte[] open(String fileName) {
         try {
@@ -144,7 +147,6 @@ public class AttachService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
