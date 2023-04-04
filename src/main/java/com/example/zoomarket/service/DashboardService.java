@@ -1,5 +1,8 @@
-package com.example.zoomarket.dashboard;
+package com.example.zoomarket.service;
 
+import com.example.zoomarket.dto.DashboardResponseDto;
+import com.example.zoomarket.entity.ActiveRequests;
+import com.example.zoomarket.repository.ActiveRequestsRepository;
 import com.example.zoomarket.repository.PostRepository;
 import com.example.zoomarket.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;

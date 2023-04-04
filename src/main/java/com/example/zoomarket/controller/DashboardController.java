@@ -1,5 +1,6 @@
-package com.example.zoomarket.dashboard;
+package com.example.zoomarket.controller;
 
+import com.example.zoomarket.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

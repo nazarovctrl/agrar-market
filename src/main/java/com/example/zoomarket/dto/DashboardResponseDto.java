@@ -1,4 +1,4 @@
-package com.example.zoomarket.dashboard;
+package com.example.zoomarket.dto;
 
 import lombok.*;
 

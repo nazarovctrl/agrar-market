@@ -1,6 +1,8 @@
-package com.example.zoomarket.dashboard;
+package com.example.zoomarket.config.security.dashboardConfig;
 
 
+import com.example.zoomarket.entity.ActiveRequests;
+import com.example.zoomarket.repository.ActiveRequestsRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

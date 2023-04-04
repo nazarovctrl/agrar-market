@@ -1,4 +1,4 @@
-package com.example.zoomarket.dashboard;
+package com.example.zoomarket.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

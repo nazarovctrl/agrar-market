@@ -1,4 +1,4 @@
-package com.example.zoomarket.dashboard;
+package com.example.zoomarket.config.security.dashboardConfig;
 
 
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,6 @@
-package com.example.zoomarket.dashboard;
+package com.example.zoomarket.repository;
 
+import com.example.zoomarket.entity.ActiveRequests;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
