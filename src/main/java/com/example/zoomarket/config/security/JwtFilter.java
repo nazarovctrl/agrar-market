@@ -4,7 +4,6 @@ import com.example.zoomarket.dto.JwtDTO;
 import com.example.zoomarket.exp.auth.JWTTokenExpiredException;
 import com.example.zoomarket.util.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -69,7 +67,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         } catch (JWTTokenExpiredException e) {
             response.setHeader("error", e.getMessage());
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             Map<String, String> error = new HashMap<>();
             error.put("error_message", e.getMessage());
             response.setContentType(APPLICATION_JSON_VALUE);

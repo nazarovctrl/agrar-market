@@ -81,7 +81,7 @@ public class AuthController {
                 new ObjectMapper().writeValue(response.getOutputStream(), tokens);
             } catch (JWTTokenExpiredException e) {
                 response.setHeader("error", e.getMessage());
-                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 Map<String, String> error = new HashMap<>();
                 error.put("error_message", e.getMessage());
                 response.setContentType(APPLICATION_JSON_VALUE);

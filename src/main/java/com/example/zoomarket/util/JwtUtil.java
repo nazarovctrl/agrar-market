@@ -75,14 +75,13 @@ public class JwtUtil {
 
     }
 
-    public static boolean isTokenExpired(String token) {
+    public static void isTokenExpired(String token) {
         DecodedJWT decodedJWT = JWT.decode(token);
         Date expiresAt = decodedJWT.getExpiresAt();
 
         if (expiresAt.before(new Date())) {
             throw new JWTTokenExpiredException("JWT expired at " + expiresAt + ". Current time: " + new Date());
         }
-        return false;
 
     }
 }
