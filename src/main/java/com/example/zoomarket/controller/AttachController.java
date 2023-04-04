@@ -53,11 +53,9 @@ public class AttachController {
     @Operation(summary = "Method for download", description = "This method used to  download file")
     @GetMapping("/download/{fineName}")
     public ResponseEntity<Resource> download(@PathVariable("fineName") String fileName) {
-       AttachDownloadDTO result = service.download(fileName);
-
-        return ResponseEntity.ok().contentType(MediaType.parseMediaType(result.getContentType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + result.getResource().getFilename() + "\"").body(result.getResource());
+        Resource file = service.download(fileName);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
 

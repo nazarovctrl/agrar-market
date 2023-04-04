@@ -7,8 +7,8 @@ import com.example.zoomarket.dto.profile.ProfileResponseDTO;
 import com.example.zoomarket.entity.ProfileEntity;
 import com.example.zoomarket.enums.ProfileRole;
 import com.example.zoomarket.enums.ProfileStatus;
-import com.example.zoomarket.exp.*;
 import com.example.zoomarket.exp.auth.*;
+import com.example.zoomarket.exp.sms.LimitOutPutException;
 import com.example.zoomarket.repository.ProfileRepository;
 import com.example.zoomarket.util.JwtUtil;
 
@@ -107,7 +107,7 @@ public class AuthService {
 
         AuthResponseDTO responseDTO = new AuthResponseDTO();
         responseDTO.setRole(entity.getRole());
-        responseDTO.setToken(JwtUtil.encode(entity.getPhone(), entity.getRole()));
+        responseDTO.setAccessToken(JwtUtil.encodeAccessToken(entity.getPhone(), entity.getRole()));
 
         return responseDTO;
 
