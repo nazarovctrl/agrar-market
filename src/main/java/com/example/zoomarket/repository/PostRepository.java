@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
@@ -18,4 +19,5 @@ public interface PostRepository extends CrudRepository<PostEntity, Long>, Paging
     Page<PostEntity> findByVisibleTrueOrderByLikeCount(Pageable pageable);
     Page<PostEntity> findByVisibleTrueAndTypeTypeOrderByLikeCountDesc(Pageable pageable, Type type);
     Page<PostEntity> findByVisibleTrueAndProfileIdAndTypeTypeOrderByLikeCountDesc(Pageable pageable, Long profileId, Type type);
+    int countAllByCreatedDateBetween(LocalDateTime joinedDate, LocalDateTime joinedDate2);
 }

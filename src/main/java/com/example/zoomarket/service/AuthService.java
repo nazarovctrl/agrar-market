@@ -28,8 +28,8 @@ public class AuthService {
     @Autowired
     public AuthService(ProfileRepository repository, SMSService phoneService, SMSHistoryService phoneHistoryService) {
         this.repository = repository;
-        this.smsService = smsService;
-        this.smsHistoryService = smsHistoryService;
+        this.smsService = phoneService;
+        this.smsHistoryService = phoneHistoryService;
 
     }
 

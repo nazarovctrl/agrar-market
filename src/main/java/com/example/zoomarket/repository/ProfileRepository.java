@@ -10,6 +10,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 @Repository
 public interface ProfileRepository extends CrudRepository<ProfileEntity, Long>, PagingAndSortingRepository<ProfileEntity, Long> {
@@ -50,4 +51,6 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Long>, 
             "set photoId=?2 " +
             "where id=?1")
     int updatePhotoIdById(Long userId, String photoId);
+
+    int countAllByCreatedDateBetween(LocalDateTime joinedDate, LocalDateTime joinedDate2);
 }
