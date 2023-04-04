@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@Tag(name = "Post Type Controller", description = "This Controller for post type")
+@Tag(name = "Category Controller", description = "This Controller for post type")
 @RestController
-@RequestMapping("/post/category")
+@RequestMapping("/category")
 public class CategoryController {
     private final CategoryService categoryService;
 

@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@Tag(name = "Post Type Controller", description = "This Controller for post type")
+@Tag(name = "Post Like Controller", description = "This Controller for post type")
 @RestController
 @RequestMapping("/post/like")
 public class PostLikeController {
