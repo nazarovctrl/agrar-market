@@ -1,6 +1,5 @@
 package com.example.zoomarket.service;
 
-
 import com.example.zoomarket.dto.auth.AuthResponseDTO;
 import com.example.zoomarket.dto.auth.VerificationDTO;
 import com.example.zoomarket.dto.profile.ProfileResponseDTO;
@@ -9,6 +8,7 @@ import com.example.zoomarket.enums.ProfileRole;
 import com.example.zoomarket.enums.ProfileStatus;
 import com.example.zoomarket.exp.*;
 import com.example.zoomarket.exp.auth.*;
+import com.example.zoomarket.exp.sms.LimitOutPutException;
 import com.example.zoomarket.repository.ProfileRepository;
 import com.example.zoomarket.util.JwtUtil;
 
@@ -23,14 +23,14 @@ import java.util.Optional;
 @Service
 public class AuthService {
     private final ProfileRepository repository;
-    private final SMSService phoneService;
-    private final SMSHistoryService phoneHistoryService;
+    private final SMSService smsService;
+    private final SMSHistoryService smsHistoryService;
 
     @Autowired
     public AuthService(ProfileRepository repository, SMSService phoneService, SMSHistoryService phoneHistoryService) {
         this.repository = repository;
-        this.phoneService = phoneService;
-        this.phoneHistoryService = phoneHistoryService;
+        this.smsService = smsService;
+        this.smsHistoryService = smsHistoryService;
 
     }
 
@@ -45,7 +45,7 @@ public class AuthService {
             }
         }
 
-        Long countInMinute = phoneHistoryService.getCountInMinute(phone);
+        Long countInMinute = smsHistoryService.getCountInMinute(phone);
         if (countInMinute > 4) {
             throw new LimitOutPutException("Resent limit");
         }
@@ -95,7 +95,7 @@ public class AuthService {
         //TODO  ob tashash kere sms provider ulangandan keyin mazgi
         if (!dto.getCode().equals("2222")) {
 
-            if (!phoneHistoryService.check(dto.getPhone(), dto.getCode())) {
+            if (!smsHistoryService.check(dto.getPhone(), dto.getCode())) {
                 throw new IncorrectSMSCodeException("Incorrect sms code");
             }
         }
@@ -105,11 +105,12 @@ public class AuthService {
 
         repository.save(entity);
 
-        AuthResponseDTO responseDTO = new AuthResponseDTO();
-        responseDTO.setRole(entity.getRole());
-        responseDTO.setToken(JwtUtil.encode(entity.getPhone(), entity.getRole()));
 
-        return responseDTO;
+        return AuthResponseDTO.builder()
+                .role(entity.getRole())
+                .accessToken(JwtUtil.encodeAccessToken(entity.getPhone(), entity.getRole()))
+                .refreshToken(JwtUtil.encodeRefreshToken(entity.getPhone(), entity.getRole()))
+                .build();
 
     }
 }

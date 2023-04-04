@@ -1,15 +1,15 @@
 package com.example.zoomarket.controller;
 
 
-import com.example.zoomarket.exp.IncorrectDateFormatException;
-import com.example.zoomarket.exp.LimitOutPutException;
+import com.example.zoomarket.exp.sms.IncorrectDateFormatException;
+import com.example.zoomarket.exp.sms.LimitOutPutException;
 import com.example.zoomarket.exp.attach.*;
 import com.example.zoomarket.exp.auth.*;
 import com.example.zoomarket.exp.post.PostDeleteNotAllowedException;
 import com.example.zoomarket.exp.post.PostNotFoundException;
 import com.example.zoomarket.exp.post.PostUpdateNotAllowedException;
 import com.example.zoomarket.exp.post.like.PostAlreadyLikedException;
-import com.example.zoomarket.exp.post.type.PostTypeNotFoundException;
+import com.example.zoomarket.exp.post.category.CategoryNotFoundException;
 import com.example.zoomarket.exp.profile.ProfileNotFoundException;
 import com.example.zoomarket.exp.sms.SMSHistoryNotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -125,14 +125,17 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> handler(PhoneNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
     @ExceptionHandler({SMSHistoryNotFoundException.class})
     private ResponseEntity<?> handler(SMSHistoryNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
-    @ExceptionHandler({PostTypeNotFoundException.class})
-    private ResponseEntity<?> handler(PostTypeNotFoundException e) {
+
+    @ExceptionHandler({CategoryNotFoundException.class})
+    private ResponseEntity<?> handler(CategoryNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
     @ExceptionHandler({PostAlreadyLikedException.class})
     private ResponseEntity<?> handler(PostAlreadyLikedException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -150,6 +153,11 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({PostUpdateNotAllowedException.class})
     private ResponseEntity<?> handler(PostUpdateNotAllowedException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    }
+
+    @ExceptionHandler({JWTTokenExpiredException.class})
+    private ResponseEntity<?> handler(JWTTokenExpiredException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
 }

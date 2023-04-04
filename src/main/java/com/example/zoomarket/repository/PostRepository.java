@@ -16,6 +16,6 @@ public interface PostRepository extends CrudRepository<PostEntity, Long>, Paging
     Optional<PostEntity> findByIdAndVisibleTrue(Long id);
 
     Page<PostEntity> findByVisibleTrueOrderByLikeCount(Pageable pageable);
-    Page<PostEntity> findByVisibleTrueAndTypeTypeOrderByLikeCountDesc(Pageable pageable, Type type);
-    Page<PostEntity> findByVisibleTrueAndProfileIdAndTypeTypeOrderByLikeCountDesc(Pageable pageable, Long profileId, Type type);
+    Page<PostEntity> findByVisibleTrueAndTypeCategoryTypeOrderByLikeCountDesc(Pageable pageable, Type type);
+    Page<PostEntity> findByVisibleTrueAndProfileIdAndTypeCategoryTypeOrderByLikeCountDesc(Pageable pageable, Long profileId, Type type);
 }

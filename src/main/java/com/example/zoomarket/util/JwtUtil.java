@@ -1,38 +1,55 @@
 package com.example.zoomarket.util;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.zoomarket.dto.JwtDTO;
 import com.example.zoomarket.enums.ProfileRole;
+import com.example.zoomarket.exp.auth.JWTTokenExpiredException;
 import io.jsonwebtoken.*;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class JwtUtil {
 
-    private static final String secretKey = "topsecretKey!123";
-    private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
+    private static final String accessTokenSecretKey = "51655468576D597133743677397A24432646294A404E635266556A586E327234";
+    private static final String refreshTokenSecretKey = "28482B4D6251655468576D5A7134743777217A24432646294A404E635266556A";
 
-    public static String encode(String phone, ProfileRole role) {
-        JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.setIssuedAt(new Date());
-        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
+    private static final int ACCESS_TOKEN_LIVE = 1000 * 3600 * 24; // 1day
+    private static final int REFRESH_TOKEN_LIVE = 1000 * 3600 * 24 * 20; // 20day
 
-        jwtBuilder.claim("phone", phone);
-
-        jwtBuilder.claim("role", role);
-
-        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
-        jwtBuilder.setIssuer("MyHealth test portali");
-        return jwtBuilder.compact();
+    private static HashMap<String, Object> getClaims(String phone, ProfileRole role) {
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("phone", phone);
+        claims.put("role", role.name());
+        return claims;
     }
 
-    public static JwtDTO decodeToken(String token) {
+    public static String encodeAccessToken(String phone, ProfileRole role) {
+        return Jwts
+                .builder()
+                .setClaims(getClaims(phone, role))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_LIVE))
+                .signWith(SignatureAlgorithm.HS512, accessTokenSecretKey)
+                .compact();
+    }
 
-        JwtParser jwtParser = Jwts.parser();
-        jwtParser.setSigningKey(secretKey);
+    public static String encodeRefreshToken(String phone, ProfileRole role) {
+        return Jwts
+                .builder()
+                .setClaims(getClaims(phone, role))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_LIVE))
+                .signWith(SignatureAlgorithm.HS512, refreshTokenSecretKey)
+                .compact();
+    }
 
-        Jws<Claims> jws = jwtParser.parseClaimsJws(token);
-
-        Claims claims = jws.getBody();
+    public static JwtDTO decodeAccessToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(accessTokenSecretKey)
+                .parseClaimsJws(token)
+                .getBody();
 
         String phone = (String) claims.get("phone");
 
@@ -43,4 +60,29 @@ public class JwtUtil {
 
     }
 
+    public static JwtDTO decodeRefreshToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(refreshTokenSecretKey)
+                .parseClaimsJws(token)
+                .getBody();
+
+        String phone = (String) claims.get("phone");
+
+        String role = (String) claims.get("role");
+        ProfileRole profileRole = ProfileRole.valueOf(role);
+
+        return new JwtDTO(phone, profileRole);
+
+    }
+
+    public static boolean isTokenExpired(String token) {
+        DecodedJWT decodedJWT = JWT.decode(token);
+        Date expiresAt = decodedJWT.getExpiresAt();
+
+        if (expiresAt.before(new Date())) {
+            throw new JWTTokenExpiredException("JWT expired at " + expiresAt + ". Current time: " + new Date());
+        }
+        return false;
+
+    }
 }

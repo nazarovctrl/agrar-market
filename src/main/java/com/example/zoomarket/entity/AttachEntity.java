@@ -30,6 +30,9 @@ public class AttachEntity {
     @Column
     private String type;
 
+    @Column(name = "content_type")
+    private String ContentType;
+
     @Column
     private String path;
 

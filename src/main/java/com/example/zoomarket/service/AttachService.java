@@ -1,11 +1,13 @@
 package com.example.zoomarket.service;
 
+import com.example.zoomarket.dto.attach.AttachDownloadDTO;
 import com.example.zoomarket.dto.attach.AttachResponseDTO;
 import com.example.zoomarket.entity.AttachEntity;
 import com.example.zoomarket.exp.attach.*;
 import com.example.zoomarket.repository.AttachRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -84,6 +86,7 @@ public class AttachService {
             entity.setType(extension);
             entity.setPath(pathFolder);
             entity.setSize(file.getSize());
+            entity.setContentType(file.getContentType());
 
             if (extension.equalsIgnoreCase("mp4")
                     || extension.equalsIgnoreCase("mov")
@@ -122,6 +125,10 @@ public class AttachService {
 
     private AttachEntity getAttach(String fileName) {
         String id = fileName.split("\\.")[0];
+        return findById(fileName);
+    }
+
+    public AttachEntity findById(String id) {
         Optional<AttachEntity> optional = repository.findById(id);
         if (optional.isEmpty()) {
             throw new FileNotFoundException("File Not Found");
@@ -140,11 +147,10 @@ public class AttachService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
-    public Resource download(String fileName) {
+    public AttachDownloadDTO download(String fileName) {
         try {
             AttachEntity entity = getAttach(fileName);
 
@@ -152,12 +158,12 @@ public class AttachService {
             File file = new File(attachUploadFolder + entity.getPath() + "/" + fileName);
 
             File dir = file.getParentFile();
-            File rFile = new File(dir, entity.getOriginName());
+            File rFile = new File(dir, entity.getId() + "." + entity.getType());
 
             Resource resource = new UrlResource(rFile.toURI());
 
             if (resource.exists() || resource.isReadable()) {
-                return resource;
+                return new AttachDownloadDTO(resource, entity.getContentType());
             } else {
                 throw new CouldNotRead("Could not read");
             }

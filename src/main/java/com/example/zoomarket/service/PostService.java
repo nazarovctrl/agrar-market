@@ -8,10 +8,8 @@ import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.exp.post.PostDeleteNotAllowedException;
 import com.example.zoomarket.exp.post.PostNotFoundException;
 import com.example.zoomarket.exp.post.PostUpdateNotAllowedException;
-import com.example.zoomarket.exp.post.type.PostTypeNotFoundException;
+import com.example.zoomarket.exp.post.category.CategoryNotFoundException;
 import com.example.zoomarket.repository.PostRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -23,18 +21,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
 public class PostService {
     private final PostRepository postRepository;
 
-    private final PostTypeService postTypeService;
+    private final TypeService typeService;
 
     private final PostPhotoService postPhotoService;
     private final PostLikeService postLikeService;
     @Autowired
     public PostService(PostRepository postRepository, PostTypeService postTypeService, PostPhotoService postPhotoService, PostLikeService postLikeService) {
         this.postRepository = postRepository;
-        this.postTypeService = postTypeService;
+        this.typeService = typeService;
         this.postPhotoService = postPhotoService;
         this.postLikeService = postLikeService;
     }
@@ -42,9 +39,10 @@ public class PostService {
     public PostResponseDTO create(Long profileId, PostCreateDTO dto) {
         PostEntity postEntity = new PostEntity();
 
-        if (!postTypeService.isPostTypeExists(dto.getTypeId())) {
-            throw new PostTypeNotFoundException("Post type not found");
+        if (!typeService.isPostTypeExists(dto.getTypeId())) {
+            throw new CategoryNotFoundException("Post type not found");
         }
+
         postEntity.setTypeId(dto.getTypeId());
         postEntity.setTitle(dto.getTitle());
         postEntity.setPrice(dto.getPrice());
@@ -110,7 +108,7 @@ public class PostService {
     public Page<PostResponseDTO> getAllByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndTypeTypeOrderByLikeCountDesc(pageable, type);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndTypeCategoryTypeOrderByLikeCountDesc(pageable, type);
 
         List<PostEntity> content = pageObj.getContent();
 
@@ -121,10 +119,11 @@ public class PostService {
 
         return new PageImpl<>(result, pageable, pageObj.getTotalElements());
     }
+
     public Page<PostResponseDTO> getProfilePostsByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndProfileIdAndTypeTypeOrderByLikeCountDesc(pageable, profileId, type);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndProfileIdAndTypeCategoryTypeOrderByLikeCountDesc(pageable, profileId, type);
 
         List<PostEntity> content = pageObj.getContent();
 
@@ -163,22 +162,42 @@ public class PostService {
             throw new PostUpdateNotAllowedException("Post update not allowed");
         }
 
-        postEntity.setTypeId(dto.getTypeId());
-        postEntity.setTitle(dto.getTitle());
-        postEntity.setPrice(dto.getPrice());
-        postEntity.setPhone(dto.getPhone());
-        postEntity.setLocation(dto.getLocation());
-        postEntity.setDescription(dto.getDescription());
-        postEntity.setProfileId(profileId);
-        postRepository.save(postEntity);
+        //TODO  Safarboy dynamic query qil yoki if bn tekshir null bomasa set qil
 
-        postPhotoService.deletePhotosByPostId(postId);
-
-        List<String> attachId = dto.getAttachId();
-        for (String attach : attachId) {
-            postPhotoService.create(postEntity.getId(), attach);
+        if (dto.getTypeId() != null) {
+            postEntity.setTypeId(dto.getTypeId());
         }
 
+        if (dto.getTitle() != null && !dto.getTitle().isBlank()) {
+            postEntity.setTitle(dto.getTitle());
+        }
+
+        if (dto.getPrice() != null && dto.getPrice() >= 0) {
+            postEntity.setPrice(dto.getPrice());
+        }
+
+        if (dto.getPhone() != null && !dto.getPhone().isBlank()) {
+            postEntity.setPhone(dto.getPhone());
+        }
+
+        if (dto.getLocation() != null && !dto.getLocation().isBlank()) {
+            postEntity.setLocation(dto.getLocation());
+        }
+
+        if (dto.getDescription() != null && !dto.getDescription().isBlank()) {
+            postEntity.setDescription(dto.getDescription());
+        }
+
+        postRepository.save(postEntity);
+
+
+        List<String> attachId = dto.getAttachId();
+        if (attachId != null && !attachId.isEmpty()) {
+            postPhotoService.deletePhotosByPostId(postId);
+            for (String attach : attachId) {
+                postPhotoService.create(postEntity.getId(), attach);
+            }
+        }
 
         return toPostResponse(postEntity, profileId);
     }

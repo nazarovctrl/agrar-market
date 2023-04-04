@@ -1,44 +1,38 @@
 package com.example.zoomarket.controller;
 
-import com.example.zoomarket.service.PostLikeService;
+import com.example.zoomarket.dto.post.category.CategoryResponseDTO;
+import com.example.zoomarket.dto.post.type.TypeCreateDTO;
+import com.example.zoomarket.dto.post.type.TypeResponseDTO;
+import com.example.zoomarket.service.CategoryService;
+import com.example.zoomarket.service.TypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @Tag(name = "Post Type Controller", description = "This Controller for post type")
 @RestController
-@RequestMapping("/post/like")
-public class PostLikeController {
-
-    private final PostLikeService postLikeService;
-    @Autowired
-    public PostLikeController(PostLikeService postLikeService) {
-        this.postLikeService = postLikeService;
-    }
+@RequestMapping("/post/category")
+@AllArgsConstructor
+public class TypeController {
+    private final TypeService typeService;
 
     @SecurityRequirement(name = "Bearer Authentication")
+    @Operation(summary = "Method for Types by categoryId", description = "This method used to get types by categoryId")
     @PreAuthorize("hasRole('USER')")
-    @Operation(summary = "Method for create like", description = " This method is used to create like ")
-    @PostMapping("/create/{postId}")
-    public ResponseEntity<Boolean> create(@PathVariable Long postId) {
-        Boolean result = postLikeService.create(getUserId(), postId);
-        return ResponseEntity.ok(result);
-    }
-
-    @SecurityRequirement(name = "Bearer Authentication")
-    @PreAuthorize("hasRole('USER')")
-    @Operation(summary = "Method for delete like", description = " This method is used to delete like ")
-    @DeleteMapping("/delete/{postId}")
-    public ResponseEntity<Boolean> delete(@PathVariable Long postId) {
-        Boolean result = postLikeService.deleteById(postId, getUserId());
+    @GetMapping("/get/{categoryId}")
+    public ResponseEntity<List<TypeResponseDTO>> getByCategoryId(@PathVariable Long categoryId) {
+        List<TypeResponseDTO> result = typeService.getByCategoryId(categoryId);
         return ResponseEntity.ok(result);
     }
 

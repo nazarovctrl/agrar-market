@@ -1,9 +1,19 @@
 ### Upload file
-POST http://localhost:8080/attach/public/upload
+POST http://localhost:8080/attach/upload
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Nzk5MjQyNDUsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MDAxMDY0NSwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.xPZuji0P6RwQXkXLaWuzPkEI7HoB5vxD1P5usi95UgNBtazuUKX0ACrIc6es8x5vmmVnf7yJxh922wHKjrw4MQ
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 
 --WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="test.jpg"
 
-< C:\Users\User\Pictures\kuchu.png
+< E:\frame.png
+
+### open
+GET http://localhost:8080/attach/open/3049a01c-46c3-4611-87b9-bfa6988c1375.jpg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Nzk5MjQyNDUsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MDAxMDY0NSwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.xPZuji0P6RwQXkXLaWuzPkEI7HoB5vxD1P5usi95UgNBtazuUKX0ACrIc6es8x5vmmVnf7yJxh922wHKjrw4MQ
+
+### download
+GET http://localhost:8080/attach/download/f0ec7b30-b922-4c49-9d29-478901edb4b4
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Nzk5MjQyNDUsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4MDAxMDY0NSwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.xPZuji0P6RwQXkXLaWuzPkEI7HoB5vxD1P5usi95UgNBtazuUKX0ACrIc6es8x5vmmVnf7yJxh922wHKjrw4MQ
+

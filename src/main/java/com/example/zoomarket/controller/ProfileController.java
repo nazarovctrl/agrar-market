@@ -4,6 +4,7 @@ import com.example.zoomarket.config.security.CustomUserDetails;
 import com.example.zoomarket.dto.profile.ProfileDetailDTO;
 import com.example.zoomarket.service.ProfileService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/detail")
     @Operation(summary = "Method for get detail", description = "This method used to get detail ")
@@ -35,9 +37,9 @@ public class ProfileController {
         return ResponseEntity.ok(result);
     }
 
-
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
-    @PutMapping("/full_name/{full_name}")
+    @PutMapping("/edit/full_name/{full_name}")
     @Operation(summary = "Method for edit full name", description = "This method used to edit full name ")
     public ResponseEntity<Boolean> editFullName(@PathVariable("full_name") String fullName) {
         Long userId = getUserId();
@@ -46,8 +48,9 @@ public class ProfileController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
-    @PutMapping("/phone/{phone}")
+    @PutMapping("/edit/phone/{phone}")
     @Operation(summary = "Method for change phone", description = "This method used to change phone")
     public ResponseEntity<Boolean> changePhone(@PathVariable("phone") String phone) {
         Long userId = getUserId();
@@ -56,8 +59,9 @@ public class ProfileController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
-    @PutMapping("/email/{email}")
+    @PutMapping("/edit/email/{email}")
     @Operation(summary = "Method for change email", description = "This method used change email")
     public ResponseEntity<Boolean> changeEmail(@PathVariable("email") String email) {
         Long userId = getUserId();
@@ -66,8 +70,9 @@ public class ProfileController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @PreAuthorize("hasAnyRole('USER')")
-    @PutMapping("/photo/{photo_id}")
+    @PutMapping("/edit/photo/{photo_id}")
     @Operation(summary = "Method for change photo", description = "This method used to change photo")
     public ResponseEntity<Boolean> changePhoto(@PathVariable("photo_id") String photoId) {
         Long userId = getUserId();

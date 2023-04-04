@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### POST UPDATE
-POST http://localhost:8080/post/update/4
+PUT http://localhost:8080/post/update/4
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw
 Content-Type: application/json
 
@@ -34,7 +34,7 @@ Content-Type: application/json
 
 
 ### GET POST BY ID
-GET http://localhost:8080/post/get/3
+GET http://localhost:8080/post/get/4
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw
 
 

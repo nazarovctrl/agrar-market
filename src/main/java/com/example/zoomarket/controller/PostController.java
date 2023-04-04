@@ -6,6 +6,7 @@ import com.example.zoomarket.dto.post.PostUpdateDTO;
 import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for create post", description = "This method used to create post")
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/create")
@@ -37,6 +39,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for update post", description = "This method used to update post")
     @PreAuthorize("hasRole('USER')")
     @PutMapping("/update/{postId}")
@@ -45,6 +48,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for delete post", description = "This method used to delete post")
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/delete/{postId}")
@@ -53,6 +57,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get post by id", description = "This method used to get post by id")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/{id}")
@@ -61,6 +66,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get all post", description = "This method used to get all posts")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/all")
@@ -70,6 +76,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get all animals", description = "This method used to get all animals")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/animals")
@@ -79,6 +86,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get all animals", description = "This method used to get animals which belongs to that user")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/profile/animals")
@@ -88,6 +96,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get all plants", description = "This method used to get all plants")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/plants")
@@ -97,6 +106,7 @@ public class PostController {
         return ResponseEntity.ok(result);
     }
 
+    @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Method for get all plants", description = "This method used to get plants which belongs to that user")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/get/profile/plants")
