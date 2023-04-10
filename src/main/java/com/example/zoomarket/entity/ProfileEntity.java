@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Embeddable
 @Getter
@@ -30,7 +32,7 @@ public class ProfileEntity {
 
     @Enumerated(value = EnumType.STRING)
     @Column
-    private ProfileStatus status=ProfileStatus.NOT_ACTIVE;
+    private ProfileStatus status = ProfileStatus.NOT_ACTIVE;
 
     @Enumerated(value = EnumType.STRING)
     @Column
@@ -42,11 +44,18 @@ public class ProfileEntity {
     @JoinColumn(name = "photo_id", insertable = false, updatable = false)
     private AttachEntity photo;
 
+    @ElementCollection
+    @Column(name = "firebase_token")
+    private List<String> firebaseTokenList = new ArrayList<>();
     @Column
     private Boolean visible = true;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
 
+
+    public void addFireBaseToken(String firebaseToken) {
+        firebaseTokenList.add(firebaseToken);
+    }
 
 }

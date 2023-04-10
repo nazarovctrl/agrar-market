@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ProfileRepository extends CrudRepository<ProfileEntity, Long>, PagingAndSortingRepository<ProfileEntity, Long> {
@@ -34,7 +35,7 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Long>, 
     @Query("UPDATE ProfileEntity  " +
             "set status=?2 " +
             "where id=?1")
-    void updateStatus(Long userId, ProfileStatus notActive);
+    int updateStatus(Long userId, ProfileStatus notActive);
 
     @Modifying
     @Transactional
@@ -49,4 +50,9 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Long>, 
             "set photoId=?2 " +
             "where id=?1")
     int updatePhotoIdById(Long userId, String photoId);
+
+
+    @Query("select firebaseTokenList from ProfileEntity " +
+            "where visible=true ")
+    List<List<String>> getFirebaseTokens();
 }
