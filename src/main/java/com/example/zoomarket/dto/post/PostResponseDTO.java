@@ -16,7 +16,7 @@ public class PostResponseDTO {
     private String location;
     private String description;
 
-    private List<String> attachId;
+    private List<String> attachLinks;
     private Long profileId;
     private Long likeCount;
     private Boolean isLiked;

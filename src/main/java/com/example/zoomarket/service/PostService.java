@@ -25,13 +25,15 @@ public class PostService {
     private final PostRepository postRepository;
 
     private final TypeService typeService;
+    private final AttachService attachService;
 
     private final PostPhotoService postPhotoService;
     private final PostLikeService postLikeService;
 
-    public PostService(PostRepository postRepository, TypeService typeService, PostPhotoService postPhotoService, PostLikeService postLikeService) {
+    public PostService(PostRepository postRepository, TypeService typeService, AttachService attachService, PostPhotoService postPhotoService, PostLikeService postLikeService) {
         this.postRepository = postRepository;
         this.typeService = typeService;
+        this.attachService = attachService;
         this.postPhotoService = postPhotoService;
         this.postLikeService = postLikeService;
     }
@@ -54,8 +56,8 @@ public class PostService {
         postRepository.save(postEntity);
 
 
-        List<String> attachId = dto.getAttachId();
-        for (String attach : attachId) {
+        List<String> attachIdList = dto.getAttachIdList();
+        for (String attach : attachIdList) {
             postPhotoService.create(postEntity.getId(), attach);
         }
 
@@ -67,7 +69,7 @@ public class PostService {
         response.setPhone(postEntity.getPhone());
         response.setLocation(postEntity.getLocation());
         response.setDescription(postEntity.getDescription());
-        response.setAttachId(attachId);
+        response.setAttachLinks(attachService.getUrl(attachIdList));
         response.setProfileId(postEntity.getProfileId());
         response.setLikeCount(postEntity.getLikeCount());
         response.setIsLiked(false);
@@ -144,7 +146,7 @@ public class PostService {
         response.setPhone(postEntity.getPhone());
         response.setLocation(postEntity.getLocation());
         response.setDescription(postEntity.getDescription());
-        response.setAttachId(postPhotoService.getPhotosByPostId(postEntity.getId()));
+        response.setAttachLinks(attachService.getUrl(postPhotoService.getPhotosByPostId(postEntity.getId())));
         response.setProfileId(postEntity.getProfileId());
         response.setLikeCount(postEntity.getLikeCount());
         response.setIsLiked(postLikeService.isLiked(profileId, postEntity.getId()));
@@ -162,7 +164,6 @@ public class PostService {
             throw new PostUpdateNotAllowedException("Post update not allowed");
         }
 
-        //TODO  Safarboy dynamic query qil yoki if bn tekshir null bomasa set qil
 
         if (dto.getTypeId() != null) {
             postEntity.setTypeId(dto.getTypeId());

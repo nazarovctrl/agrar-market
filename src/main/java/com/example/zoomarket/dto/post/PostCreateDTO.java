@@ -13,7 +13,7 @@ public class PostCreateDTO {
     @Positive(message = "TypeId cannot be negative")
     private Long typeId;
 
-    private List<String> attachId;
+    private List<String> attachIdList;
 
     @NotBlank(message = "Title cannot be blank")
     private String title;
