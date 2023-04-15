@@ -23,7 +23,7 @@ public class TypeEntity {
     @JoinColumn(name = "attach_id", insertable = false, updatable = false)
     private AttachEntity attach;
 
-    @Column
+    @Column(unique = true)
     private String name;
 
     @Column(name = "category_id")

@@ -1,6 +1,5 @@
 package com.example.zoomarket.dto.post.type;
 
-import com.example.zoomarket.enums.Type;
 import lombok.Getter;
 import lombok.Setter;
 
