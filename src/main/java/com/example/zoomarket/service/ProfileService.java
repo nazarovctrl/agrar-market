@@ -8,7 +8,11 @@ import com.example.zoomarket.exp.profile.ProfileNotFoundException;
 import com.example.zoomarket.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ProfileService {
@@ -82,5 +86,13 @@ public class ProfileService {
     public Boolean changePhoto(Long userId, String photoId) {
         int r = profileRepository.updatePhotoIdById(userId, photoId);
         return r == 1;
+    }
+
+
+    public List<String> getFirebaseTokens() {
+        List<List<String>> firebaseTokensList = profileRepository.getFirebaseTokens();
+
+        return firebaseTokensList.stream()
+                .flatMap(Collection::stream).toList();
     }
 }

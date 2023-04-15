@@ -1,5 +1,6 @@
 package com.example.zoomarket.dto.auth;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,4 +14,6 @@ public class VerificationDTO {
     @Size(min = 4, max = 4, message = "Password required")
     private String code;
 
+    @NotBlank(message = "Firebase token required")
+    private String firebaseToken;
 }

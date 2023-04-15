@@ -126,7 +126,7 @@ public class AttachService {
 
     private AttachEntity getAttach(String fileName) {
         String id = fileName.split("\\.")[0];
-        return findById(fileName);
+        return findById(id);
     }
 
     public AttachEntity findById(String id) {
@@ -222,7 +222,20 @@ public class AttachService {
             throw new FileNotFoundException("File not found");
         }
         return attachDownloadUrl + optional.get().getId() + "." + optional.get().getType();
+    }
 
+    public List<String> getUrl(List<String> imageIdList) {
+        List<String> links = new ArrayList<>();
+
+        imageIdList.forEach(imageId -> {
+            Optional<AttachEntity> optional = repository.findById(imageId);
+            if (optional.isEmpty()) {
+                throw new FileNotFoundException("File not found");
+            }
+            links.add(attachDownloadUrl + optional.get().getId() + "." + optional.get().getType());
+        });
+
+        return links;
     }
 
 
