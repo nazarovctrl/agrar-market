@@ -82,14 +82,17 @@ public class SMSHistoryService {
     }
 
     public Boolean check(String phone, String code) {
-        Optional<SMSHistoryEntity> optional = repository.findByPhoneOrderByCreatedDate(phone);
-        if (optional.isEmpty()) {
+        Pageable pageable = PageRequest.of(0, 1);
+
+        Page<SMSHistoryEntity> pageObj = repository.findByPhoneOrderByCreatedDateDesc(phone, pageable);
+        List<SMSHistoryEntity> content = pageObj.getContent();
+        if (content.isEmpty()) {
             throw new SMSHistoryNotFoundException("Sms history not found");
         }
 
-        SMSHistoryEntity entity = optional.get();
+        SMSHistoryEntity entity = content.get(0);
 
-        if (entity.getCode().equals(code)&&entity.isVisible()) {
+        if (entity.getCode().equals(code) && entity.isVisible()) {
             entity.setVisible(false);
             repository.save(entity);
             return true;

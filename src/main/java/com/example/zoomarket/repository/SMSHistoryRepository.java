@@ -1,6 +1,8 @@
 package com.example.zoomarket.repository;
 
 import com.example.zoomarket.entity.SMSHistoryEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -21,5 +23,5 @@ public interface SMSHistoryRepository extends CrudRepository<SMSHistoryEntity, I
 
     long countByPhoneAndCreatedDateBetween(String email, LocalDateTime fromDate, LocalDateTime toDate);
 
-    Optional<SMSHistoryEntity> findByPhoneOrderByCreatedDate(String phone);
+    Page<SMSHistoryEntity> findByPhoneOrderByCreatedDateDesc(String phone, Pageable pageable);
 }
