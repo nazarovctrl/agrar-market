@@ -28,7 +28,7 @@ public class CategoryController {
     }
 
     @SecurityRequirement(name = "Bearer Authentication")
-    @Operation(summary = "Method for create post type", description = "This method used to create post type")
+    @Operation(summary = "Method for create post category", description = "This method used to create post category")
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<CategoryResponseDTO> create(@Valid @RequestBody CategoryCreateDTO postCategoryCreateDTO) {
