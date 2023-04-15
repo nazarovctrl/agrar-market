@@ -20,6 +20,10 @@ public class SMSHistoryEntity {
     private String phone;
     @Column
     private String code;
+
+    @Column
+    private boolean visible = true;
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
+
 }

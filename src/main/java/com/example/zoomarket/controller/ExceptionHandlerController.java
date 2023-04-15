@@ -160,4 +160,9 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> handler(JWTTokenExpiredException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
+
+    @ExceptionHandler({InCorrectPhoneNumberException.class})
+    private ResponseEntity<?> handler(InCorrectPhoneNumberException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    }
 }

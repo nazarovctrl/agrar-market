@@ -32,31 +32,42 @@ public class AuthService {
 
     }
 
+    public void isValidPhoneNumber(String phone) {
+        if (!phone.matches("9[98][0-9]{10}")) {
+            throw new InCorrectPhoneNumberException("In correct phone number");
+        }
+    }
 
     public ProfileResponseDTO registration(String phone) {
 
-        Optional<ProfileEntity> exists = repository.findByPhone(phone);
-        if (exists.isPresent()) {
-            ProfileEntity entity = exists.get();
-            if (entity.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
-                repository.delete(entity);
-            }
-        }
+        isValidPhoneNumber(phone);
 
         Long countInMinute = smsHistoryService.getCountInMinute(phone);
-        if (countInMinute > 4) {
+        if (countInMinute >= 1) {
             throw new LimitOutPutException("Resent limit");
         }
 
+        Optional<ProfileEntity> exists = repository.findByPhone(phone);
+        ProfileEntity entity;
+        if (exists.isPresent()) {
+            entity = exists.get();
+            if (entity.getStatus().equals(ProfileStatus.NOT_ACTIVE)) {
+                repository.delete(entity);
+                entity = new ProfileEntity();
+                entity.setPhone(phone);
+                entity.setRole(ProfileRole.ROLE_USER);
+                repository.save(entity);
+            } else if (entity.getStatus().equals(ProfileStatus.BLOCK)) {
+                throw new ProfileStatusBlockException("This profile blocked");
+            }
+        } else {
+            entity = new ProfileEntity();
+            entity.setPhone(phone);
+            entity.setRole(ProfileRole.ROLE_USER);
+            repository.save(entity);
+        }
 
-        ProfileEntity entity = new ProfileEntity();
-        entity.setPhone(phone);
-        entity.setRole(ProfileRole.ROLE_USER);
-        repository.save(entity);
-
-        //TODO send sms
-
-
+        smsService.sendSMS(phone);
         return getDTO(entity);
 
     }
@@ -77,6 +88,7 @@ public class AuthService {
 
 
     public AuthResponseDTO verification(VerificationDTO dto) {
+        isValidPhoneNumber(dto.getPhone());
 
         Optional<ProfileEntity> optional = repository.findByPhone(dto.getPhone());
 
@@ -90,15 +102,13 @@ public class AuthService {
             throw new ProfileStatusBlockException("Profile status blocked");
         }
 
-        //TODO  ob tashash kere sms provider ulangandan keyin mazgi
-        if (!dto.getCode().equals("2222")) {
 
-            if (!smsHistoryService.check(dto.getPhone(), dto.getCode())) {
-                throw new IncorrectSMSCodeException("Incorrect sms code");
-            }
+        if (!smsHistoryService.check(dto.getPhone(), dto.getCode())) {
+            throw new IncorrectSMSCodeException("Incorrect sms code");
         }
 
 
+        entity.addFireBaseToken(dto.getFirebaseToken());
         entity.setStatus(ProfileStatus.ACTIVE);
 
         repository.save(entity);

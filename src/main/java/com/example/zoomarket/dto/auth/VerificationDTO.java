@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class VerificationDTO {
-    @Size(min = 9, message = "Phone required")
+    @Size(min = 12, message = "Phone required")
     private String phone;
 
     @Size(min = 4, max = 4, message = "Password required")

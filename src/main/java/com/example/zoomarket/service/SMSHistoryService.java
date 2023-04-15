@@ -89,7 +89,19 @@ public class SMSHistoryService {
 
         SMSHistoryEntity entity = optional.get();
 
-        return entity.getCode().equals(code);
+        if (entity.getCode().equals(code)&&entity.isVisible()) {
+            entity.setVisible(false);
+            repository.save(entity);
+            return true;
+        }
+        return false;
 
+    }
+
+    public void addHistory(String phone, String code) {
+        SMSHistoryEntity entity = new SMSHistoryEntity();
+        entity.setPhone(phone);
+        entity.setCode(code);
+        repository.save(entity);
     }
 }
