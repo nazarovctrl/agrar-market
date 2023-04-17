@@ -11,7 +11,6 @@ import org.hibernate.annotations.GenericGenerator;
 import java.time.LocalDateTime;
 
 @Entity
-
 @Getter
 @Setter
 @Table(name = "attach")

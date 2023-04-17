@@ -10,6 +10,7 @@ import com.example.zoomarket.exp.post.PostNotFoundException;
 import com.example.zoomarket.exp.post.PostUpdateNotAllowedException;
 import com.example.zoomarket.exp.post.category.CategoryNotFoundException;
 import com.example.zoomarket.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -29,7 +30,7 @@ public class PostService {
     private final PostPhotoService postPhotoService;
     private final PostLikeService postLikeService;
     @Autowired
-    public PostService(PostRepository postRepository, PostTypeService postTypeService, PostPhotoService postPhotoService, PostLikeService postLikeService) {
+    public PostService(PostRepository postRepository, TypeService typeService, PostPhotoService postPhotoService, PostLikeService postLikeService) {
         this.postRepository = postRepository;
         this.typeService = typeService;
         this.postPhotoService = postPhotoService;

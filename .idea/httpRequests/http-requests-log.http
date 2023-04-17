@@ -1,3 +1,55 @@
+PUT http://localhost:8080/auth/verification
+Content-Type: application/json
+Content-Length: 44
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "phone": "998145008",
+  "code": "2222"
+}
+
+<> 2023-04-06T111055.400.txt
+
+###
+
+POST http://localhost:8080/auth/authorization/998145004
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-04-06T111039.200.json
+
+###
+
+PUT http://localhost:8080/auth/verification
+Content-Type: application/json
+Content-Length: 44
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "phone": "998145008",
+  "code": "2222"
+}
+
+<> 2023-04-06T111015.400.txt
+
+###
+
+POST http://localhost:8080/auth/authorization/998145004
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-04-06T111004.200.json
+
+###
+
 GET http://localhost:8080/post/get/4
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw
 Connection: Keep-Alive
@@ -550,46 +602,6 @@ Cookie: JSESSIONID=00C7BC0E3D867834FC39FC02A9BD68C2
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-03-18T214012.200.json
-
-###
-
-DELETE http://localhost:8080/post/like/delete/1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxNDkxNzYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIzNTU3NiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.coCDKMHx5RI-3lbehgwoiDfLQZFwdGpDMNLioR6diI8VN2PIE8jgdt8OS0YW1L03j4x20MwmE_7PxAEq4-Bn9A
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Cookie: JSESSIONID=00C7BC0E3D867834FC39FC02A9BD68C2
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-DELETE http://localhost:8080/post/like/delete/1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxNDkxNzYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIzNTU3NiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.coCDKMHx5RI-3lbehgwoiDfLQZFwdGpDMNLioR6diI8VN2PIE8jgdt8OS0YW1L03j4x20MwmE_7PxAEq4-Bn9A
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Cookie: JSESSIONID=2B4D0B87C2E114B8501603867CB10DA4
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-DELETE http://localhost:8080/post/like/delete/1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxNDkxNzYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIzNTU3NiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.coCDKMHx5RI-3lbehgwoiDfLQZFwdGpDMNLioR6diI8VN2PIE8jgdt8OS0YW1L03j4x20MwmE_7PxAEq4-Bn9A
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Cookie: JSESSIONID=2B4D0B87C2E114B8501603867CB10DA4
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-03-18T213955.200.json
-
-###
-
-GET http://localhost:8080/post/get/profile/animals?page=0&size=2
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.6)
-Cookie: JSESSIONID=2B4D0B87C2E114B8501603867CB10DA4
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-03-18T213758.200.json
 
 ###
 
