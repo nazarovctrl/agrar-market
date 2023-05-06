@@ -12,5 +12,5 @@ import java.util.List;
 
 @Repository
 public interface TypeRepository extends CrudRepository<TypeEntity, Long>, PagingAndSortingRepository<TypeEntity, Long> {
-    List<TypeEntity> findByCategoryId(Long categoryId);
+    List<TypeEntity> findByCategoryIdOrderById(Long categoryId);
 }

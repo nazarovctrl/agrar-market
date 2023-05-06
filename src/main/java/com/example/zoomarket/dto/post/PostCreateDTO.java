@@ -1,5 +1,6 @@
 package com.example.zoomarket.dto.post;
 
+import com.example.zoomarket.enums.Currency;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
@@ -21,6 +22,8 @@ public class PostCreateDTO {
     @Positive(message = "Price cannot be negative")
     private Double price;
 
+    @NotBlank(message = "Currency cannot be blank")
+    private Currency currency;
     @NotBlank(message = "Phone cannot be blank")
     private String phone;
 

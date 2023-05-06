@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class TypeResponseDTO {
     private Long id;
-    private String attachId;
+    private String imageUrl;
     private String name;
     private Long categoryId;
 }

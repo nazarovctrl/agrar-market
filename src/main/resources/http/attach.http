@@ -1,18 +1,16 @@
 ### Upload file
-POST http://localhost:8080/attach/upload
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwicGhvbmUiOiI5OTgxNDUwMDQiLCJleHAiOjE2ODEzNDY0NDgsImlhdCI6MTY4MTI2MDA0OH0.msiBoomdXelrROuTRmDZ6JNt0KpEl-HVV2sCjTPqwFCMfKoL_1TN0enUODMFiNwfmkCo4DweoX_lUvfM7-7G6w
+POST http://159.223.94.231:8080/attach/upload
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwicGhvbmUiOiI5OTg5OTgxNDUwMDUiLCJleHAiOjE2ODMzMDI2MjYsImlhdCI6MTY4MzIxNjIyNn0.hppQ9KQWFNCVrw0oMXJTezh089fSkdIl5oafb5tO0gJpZBZv3U-Rn-ej_Db7W4UjbInED3S2l7wMtJdUy6-L1w
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="test.jpg"
+Content-Disposition: form-data; name="file"; filename="echkiemar.jpg"
 
-< E:\frame.png
+< C:\Users\User\Downloads\echkiemar.jpg
 
 ### open
-GET http://localhost:8080/attach/open/7c3a6440-c3d1-468f-bc4b-cc33b44631dd.png
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwicGhvbmUiOiI5OTgxNDUwMDQiLCJleHAiOjE2ODEzNDY0NDgsImlhdCI6MTY4MTI2MDA0OH0.msiBoomdXelrROuTRmDZ6JNt0KpEl-HVV2sCjTPqwFCMfKoL_1TN0enUODMFiNwfmkCo4DweoX_lUvfM7-7G6w
-
+GET http://159.223.94.231:8080/attach/public/open/3d6096a3-f127-4534-89e7-6b6a70dd4018.jpg
 ### download
-GET http://localhost:8080/attach/download/7c3a6440-c3d1-468f-bc4b-cc33b44631dd
+GET http://localhost:8080/attach/download/7c270ea1-0d9b-4bc9-bf2e-cb1ccfd74bff
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwicGhvbmUiOiI5OTgxNDUwMDQiLCJleHAiOjE2ODEzNDY0NDgsImlhdCI6MTY4MTI2MDA0OH0.msiBoomdXelrROuTRmDZ6JNt0KpEl-HVV2sCjTPqwFCMfKoL_1TN0enUODMFiNwfmkCo4DweoX_lUvfM7-7G6w

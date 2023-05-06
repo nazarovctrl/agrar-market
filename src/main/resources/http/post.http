@@ -44,9 +44,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiO
 
 
 ### GET ALL BY LIKE COUNT
-GET http://localhost:8080/post/get/all?page=0&size=2
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw
-
+GET http://159.223.94.231:8080/post/get/all?page=0&size=6
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwicGhvbmUiOiI5OTg5OTgxNDUwMDUiLCJleHAiOjE2ODMwMjEzNjksImlhdCI6MTY4MjkzNDk2OX0.0ShrGp3w8zShcejmtpajiGIC-X2vxemoTvvjVziECpcIyvxdbqQoMSraCsla6Ijbauij-LyyMMpRlFQWXQCQMA
 ### GET ALL ANIMALS
 GET http://localhost:8080/post/get/animals?page=0&size=2
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NzkxMzk5MDYsInBob25lIjoiOTk4MTQ1MDA4Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY3OTIyNjMwNiwiaXNzIjoiTXlIZWFsdGggdGVzdCBwb3J0YWxpIn0.IIyExu1cZdL8iiWS-BL_atRdlCenL28wr1Q3MmufMHPg9wVgu13CoOOjWLe_bEU9Em-proAuLNZiO38jWc7ntw

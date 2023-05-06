@@ -38,10 +38,8 @@ public class AttachController {
         return ResponseEntity.ok().body(fileName);
     }
 
-    @SecurityRequirement(name = "Bearer Authentication")
-    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Method for open", description = "This method used to  open file")
-    @GetMapping(value = "/open/{fileName}", produces = MediaType.ALL_VALUE)
+    @GetMapping(value = "/public/open/{fileName}", produces = MediaType.ALL_VALUE)
     public byte[] open(@PathVariable("fileName") String fileName) {
         return service.open(fileName);
     }

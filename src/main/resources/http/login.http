@@ -1,26 +1,31 @@
 ### Upload file
-POST http://localhost:8080/attach/public/upload
+POST http://159.223.94.231:8080/attach/upload
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwicGhvbmUiOiI5OTg5OTgxNDUwMDUiLCJleHAiOjE2ODMyMDc2OTYsImlhdCI6MTY4MzEyMTI5Nn0.6lJXABbNruCUr7ZzQiMV1o4pA0Hi2QJ7rzofLqh_8F3-4p6XeSI4OCN2obnySnejcmAg32yU54lzY24ChjxwPQ
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="test.jpg"
+Content-Disposition: form-data; name="file"; filename="cactus.png"
 
-< C:\Users\User\Pictures\Camera Roll\test.jpg
+< C:\Users\User\Downloads\Telegram Desktop\cactus.png
 
 
 
 ### Register
-POST http://localhost:8080/auth/authorization/998145004
+POST http://159.223.94.231:8080/auth/authorization/998998145005
+
+### Register
+POST http://localhost:8080/auth/authorization/998998145005
 
 
 ### LOGIN USER
-PUT http://localhost:8080/auth/verification
+PUT http://159.223.94.231:8080/auth/verification
 Content-Type: application/json
 
 {
-  "phone": "998145008",
-  "code": "2222"
+  "phone": "998998145005",
+  "code": "2222",
+  "firebaseToken": "wdwasad"
 }
 
 ### LOGIN ADMIN
@@ -28,8 +33,9 @@ PUT http://localhost:8080/auth/verification
 Content-Type: application/json
 
 {
-  "phone": "998339561608",
-  "code": "2222"
+  "phone": "998998145005",
+  "code": "2222",
+  "firebaseToken": "wdwasad"
 }
 
 #### refresh token

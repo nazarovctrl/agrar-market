@@ -44,11 +44,12 @@ public class CategoryService {
     }
 
     public List<CategoryResponseDTO> getAnimalTypes() {
-        List<CategoryEntity> byType = categoryRepository.findByType(Type.ANIMAL);
+        List<CategoryEntity> byType = categoryRepository.findByTypeOrderById(Type.ANIMAL);
         List<CategoryResponseDTO> result = new LinkedList<>();
         for (CategoryEntity categoryEntity : byType) {
             CategoryResponseDTO categoryResponseDTO = new CategoryResponseDTO();
             categoryResponseDTO.setId(categoryEntity.getId());
+            categoryResponseDTO.setImageUrl(attachService.getUrl(categoryEntity.getAttachId()));
             categoryResponseDTO.setName(categoryEntity.getName());
             categoryResponseDTO.setType(categoryEntity.getType());
             result.add(categoryResponseDTO);
@@ -58,11 +59,12 @@ public class CategoryService {
 
 
     public List<CategoryResponseDTO> getPlantTypes() {
-        List<CategoryEntity> byType = categoryRepository.findByType(Type.PLANT);
+        List<CategoryEntity> byType = categoryRepository.findByTypeOrderById(Type.PLANT);
         List<CategoryResponseDTO> result = new LinkedList<>();
         for (CategoryEntity categoryEntity : byType) {
             CategoryResponseDTO categoryResponseDTO = new CategoryResponseDTO();
             categoryResponseDTO.setId(categoryEntity.getId());
+            categoryResponseDTO.setImageUrl(attachService.getUrl(categoryEntity.getAttachId()));
             categoryResponseDTO.setName(categoryEntity.getName());
             categoryResponseDTO.setType(categoryEntity.getType());
             result.add(categoryResponseDTO);

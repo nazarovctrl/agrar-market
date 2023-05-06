@@ -1,5 +1,6 @@
 package com.example.zoomarket.entity;
 
+import com.example.zoomarket.enums.Currency;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +36,9 @@ public class PostEntity {
     @Column
     private Double price;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Currency currency;
     @Column
     private String phone;
 

@@ -54,10 +54,5 @@ public class CategoryController {
         return ResponseEntity.ok(result);
     }
 
-    private Long getUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        com.example.zoomarket.config.security.CustomUserDetails user = (com.example.zoomarket.config.security.CustomUserDetails) authentication.getPrincipal();
 
-        return user.getId();
-    }
 }

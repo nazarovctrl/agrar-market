@@ -39,19 +39,20 @@ public class TypeService {
         response.setId(typeEntity.getId());
         response.setName(typeEntity.getName());
         response.setCategoryId(typeEntity.getCategoryId());
-        response.setAttachId(typeEntity.getAttachId());
+        response.setImageUrl(attachService.getUrl(typeEntity.getAttachId()));
+
         return response;
     }
 
     public List<TypeResponseDTO> getByCategoryId(Long categoryId) {
-        List<TypeEntity> byType = typeRepository.findByCategoryId(categoryId);
+        List<TypeEntity> byType = typeRepository.findByCategoryIdOrderById(categoryId);
         List<TypeResponseDTO> result = new LinkedList<>();
         for (TypeEntity typeEntity : byType) {
             TypeResponseDTO response = new TypeResponseDTO();
             response.setId(typeEntity.getId());
             response.setName(typeEntity.getName());
             response.setCategoryId(typeEntity.getCategoryId());
-            response.setAttachId(typeEntity.getAttachId());
+            response.setImageUrl(attachService.getUrl(typeEntity.getAttachId()));
             result.add(response);
         }
         return result;

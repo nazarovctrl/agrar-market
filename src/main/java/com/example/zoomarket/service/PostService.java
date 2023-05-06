@@ -3,7 +3,6 @@ package com.example.zoomarket.service;
 import com.example.zoomarket.dto.post.PostCreateDTO;
 import com.example.zoomarket.dto.post.PostResponseDTO;
 import com.example.zoomarket.dto.post.PostUpdateDTO;
-import com.example.zoomarket.entity.PostEntity;
 import com.example.zoomarket.enums.Type;
 import com.example.zoomarket.exp.post.PostDeleteNotAllowedException;
 import com.example.zoomarket.exp.post.PostNotFoundException;
@@ -15,6 +14,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import com.example.zoomarket.entity.PostEntity;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -48,6 +48,7 @@ public class PostService {
         postEntity.setTypeId(dto.getTypeId());
         postEntity.setTitle(dto.getTitle());
         postEntity.setPrice(dto.getPrice());
+        postEntity.setCurrency(dto.getCurrency());
         postEntity.setPhone(dto.getPhone());
         postEntity.setLocation(dto.getLocation());
         postEntity.setDescription(dto.getDescription());
@@ -66,6 +67,7 @@ public class PostService {
         response.setTypeId(postEntity.getTypeId());
         response.setTitle(postEntity.getTitle());
         response.setPrice(postEntity.getPrice());
+        response.setCurrency(postEntity.getCurrency());
         response.setPhone(postEntity.getPhone());
         response.setLocation(postEntity.getLocation());
         response.setDescription(postEntity.getDescription());
@@ -73,6 +75,7 @@ public class PostService {
         response.setProfileId(postEntity.getProfileId());
         response.setLikeCount(postEntity.getLikeCount());
         response.setIsLiked(false);
+        response.setCreatedDate(postEntity.getCreatedDate());
         return response;
     }
 
@@ -95,7 +98,7 @@ public class PostService {
     public Page<PostResponseDTO> getAll(Integer page, Integer size, Long profileId) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueOrderByLikeCount(pageable);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueOrderByCreatedDateDescLikeCountDesc(pageable);
 
         List<PostEntity> content = pageObj.getContent();
 
@@ -110,7 +113,7 @@ public class PostService {
     public Page<PostResponseDTO> getAllByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndTypeCategoryTypeOrderByLikeCountDesc(pageable, type);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndTypeCategoryTypeOrderByCreatedDateDescLikeCountDesc(pageable, type);
 
         List<PostEntity> content = pageObj.getContent();
 
@@ -125,7 +128,7 @@ public class PostService {
     public Page<PostResponseDTO> getProfilePostsByType(Integer page, Integer size, Long profileId, Type type) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndProfileIdAndTypeCategoryTypeOrderByLikeCountDesc(pageable, profileId, type);
+        Page<PostEntity> pageObj = postRepository.findByVisibleTrueAndProfileIdAndTypeCategoryTypeOrderByCreatedDateDescLikeCountDesc(pageable, profileId, type);
 
         List<PostEntity> content = pageObj.getContent();
 
@@ -143,6 +146,7 @@ public class PostService {
         response.setTypeId(postEntity.getTypeId());
         response.setTitle(postEntity.getTitle());
         response.setPrice(postEntity.getPrice());
+        response.setCurrency(postEntity.getCurrency());
         response.setPhone(postEntity.getPhone());
         response.setLocation(postEntity.getLocation());
         response.setDescription(postEntity.getDescription());
@@ -150,6 +154,7 @@ public class PostService {
         response.setProfileId(postEntity.getProfileId());
         response.setLikeCount(postEntity.getLikeCount());
         response.setIsLiked(postLikeService.isLiked(profileId, postEntity.getId()));
+        response.setCreatedDate(postEntity.getCreatedDate());
         return response;
     }
 

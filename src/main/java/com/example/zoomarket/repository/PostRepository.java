@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface PostRepository extends CrudRepository<PostEntity, Long>, PagingAndSortingRepository<PostEntity, Long> {
     Optional<PostEntity> findByIdAndVisibleTrue(Long id);
 
-    Page<PostEntity> findByVisibleTrueOrderByLikeCount(Pageable pageable);
-    Page<PostEntity> findByVisibleTrueAndTypeCategoryTypeOrderByLikeCountDesc(Pageable pageable, Type type);
-    Page<PostEntity> findByVisibleTrueAndProfileIdAndTypeCategoryTypeOrderByLikeCountDesc(Pageable pageable, Long profileId, Type type);
+    Page<PostEntity> findByVisibleTrueOrderByCreatedDateDescLikeCountDesc(Pageable pageable);
+    Page<PostEntity> findByVisibleTrueAndTypeCategoryTypeOrderByCreatedDateDescLikeCountDesc(Pageable pageable, Type type);
+    Page<PostEntity> findByVisibleTrueAndProfileIdAndTypeCategoryTypeOrderByCreatedDateDescLikeCountDesc(Pageable pageable, Long profileId, Type type);
 }

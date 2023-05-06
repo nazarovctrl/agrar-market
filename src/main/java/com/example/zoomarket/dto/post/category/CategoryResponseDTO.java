@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class CategoryResponseDTO {
     private Long id;
+    private String imageUrl;
     private String name;
     private Type type;
 }
